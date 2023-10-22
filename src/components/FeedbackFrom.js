@@ -2,7 +2,7 @@ const FeedbackFrom = () => {
   return (
     <div>
       <div className="mb-10 text-primary">
-        <h1 className="text-5xl font-serif font-semibold text-center">
+        <h1 className="text-5xl font-serif font-semibold text-center uppercase">
           Free Estimate
         </h1>
         <p className=" font-serif text-center my-2">
