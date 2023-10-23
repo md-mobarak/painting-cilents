@@ -1,6 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Home from "@/components/Home";
 
+import ScrollToTop from "react-scroll-to-top";
+// ..
+
 export default function index({ data }) {
   // console.log(data.data);
   if (!data?.data?.length) {
@@ -9,6 +12,8 @@ export default function index({ data }) {
     return (
       <main>
         <Home data={data}></Home>
+
+        <ScrollToTop smooth color="#3F3B75" />
       </main>
     );
   }

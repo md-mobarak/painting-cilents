@@ -10,7 +10,7 @@ import { Navigation, Pagination } from "swiper/modules";
 
 const HeroSection = () => {
   return (
-    <div>
+    <div data-aos="flip-up" data-aos-duration="3000">
       <Swiper
         pagination={{
           clickable: true,

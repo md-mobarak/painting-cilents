@@ -18,10 +18,15 @@ const OurServices = (data) => {
           <AiFillFormatPainter className="h-14 w-14 text-secondary "></AiFillFormatPainter>
         </div>
       </section>
-      <section className="grid grid-cols-3 gap-5 font-serif">
+      <section className="lg:grid  grid-cols-3 gap-5 font-serif">
         {data?.data?.data?.data?.map((p) => {
           return (
-            <div className="card card-compact w-96 text-black  bg-base-100 shadow-xl">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="2000"
+              data-aos-anchor-placement="top-bottom"
+              className="card card-compact w-96 text-black  bg-base-100 shadow-xl"
+            >
               <figure>
                 <img
                   className="h-[256px] w-[384px]"

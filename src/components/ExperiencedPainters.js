@@ -6,7 +6,10 @@ import { HiUserGroup } from "react-icons/hi";
 const ExperiencedPainters = () => {
   return (
     <div className=" lg:my-20 my-8 font-serif lg:flex gap-10 items-center text-black">
-      <section>
+      <section
+      data-aos="fade-up-left"
+      data-aos-duration="2000"
+      >
         <h1 className="text-3xl font-semibold text-primary">
           We believe that a fresh coat of paint can transform any space.
         </h1>
@@ -51,7 +54,11 @@ const ExperiencedPainters = () => {
           ABOUT
         </button>
       </section>
-      <section>
+      <section
+      
+      data-aos="fade-up-right"
+      data-aos-duration="3000"
+      >
         <img
           className="lg:w-[2000px] lg:h-[600px] w-full h-full  p-3 shadow-xl rounded-xl "
           src="https://www.paintsplatter.oxacor.com/wp-content/uploads/paint-roller-to-paint-1024x682.jpg"

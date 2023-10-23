@@ -1,6 +1,10 @@
 const FeedbackFrom = () => {
   return (
-    <div>
+    <div
+      data-aos="flip-left"
+      data-aos-easing="ease-out-cubic"
+      data-aos-duration="3000"
+    >
       <div className="mb-10 text-primary">
         <h1 className="text-5xl font-serif font-semibold text-center uppercase">
           Free Estimate
@@ -11,26 +15,30 @@ const FeedbackFrom = () => {
         </p>
       </div>
       <div className="hero-image rounded-xl ">
-        <div className="card hero-text bg-glass flex-shrink-0 w-full max-w-sm border-2 border-yellow-300 ">
-          <form className="card-body">
+        <div className="card hero-text  bg-gradient-to-r from-blue-500 to-purple-500 backdrop-blur-lg bg-opacity-40 flex-shrink-0 w-10/12 max-w-sm ">
+          <form
+            className="card-body "
+            data-aos="fade-up"
+            data-aos-duration="3000"
+          >
             <div className="form-control">
               <label className="label">
-                <span className="label-text ">Email</span>
+                <span className="label-text text-white">Name</span>
               </label>
               <input
-                type="email"
-                placeholder="email"
+                type="text"
+                placeholder="Type your Name"
                 className="input border border-green-500"
                 required
               />
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-white">Email</span>
               </label>
               <input
-                type="password"
-                placeholder="password"
+                type="email"
+                placeholder="Type your Email"
                 className="input border border-green-500"
                 required
               />
@@ -42,7 +50,7 @@ const FeedbackFrom = () => {
             </div>
             <div className="form-control">
               <label className="label">
-                <span className="label-text ">Feedback</span>
+                <span className="label-text text-white">Feedback</span>
               </label>
               <textarea
                 className="textarea border border-green-500"

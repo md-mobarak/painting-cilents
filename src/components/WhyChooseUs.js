@@ -7,7 +7,12 @@ const WhyChooseUs = () => {
         Why Choose Us?
       </h1>
       <div className="lg:grid lg:grid-cols-3 gap-10 text-primary ">
-        <div className="hover:shadow-xl ">
+        <div
+          className="hover:shadow-xl "
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/faux.png"
@@ -18,7 +23,12 @@ const WhyChooseUs = () => {
             <h1 className="text-center text-xl font-semibold">Faux Finishes</h1>
           </div>
         </div>
-        <div className="hover:shadow-xl">
+        <div
+          className="hover:shadow-xl"
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/water-proofing.png"
@@ -31,7 +41,12 @@ const WhyChooseUs = () => {
             </h1>
           </div>
         </div>
-        <div className="hover:shadow-xl">
+        <div
+          className="hover:shadow-xl"
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/pre-paint.png"
@@ -44,7 +59,12 @@ const WhyChooseUs = () => {
             </h1>
           </div>
         </div>
-        <div className="hover:shadow-xl">
+        <div
+          className="hover:shadow-xl"
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/removeal.png"
@@ -57,7 +77,12 @@ const WhyChooseUs = () => {
             </h1>
           </div>
         </div>
-        <div className="hover:shadow-xl">
+        <div
+          className="hover:shadow-xl"
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/color-proof.png"
@@ -68,7 +93,12 @@ const WhyChooseUs = () => {
             <h1 className="text-center text-xl font-semibold">Color Proof</h1>
           </div>
         </div>
-        <div className="hover:shadow-xl">
+        <div
+          className="hover:shadow-xl"
+          data-aos="fade-down"
+          data-aos-anchor-placement="bottom-bottom"
+          data-aos-duration="3000"
+        >
           <div className="flex justify-center">
             <img
               src="http://dtpainting.wpenginepowered.com/wp-content/uploads/2016/03/window-washing.png"
