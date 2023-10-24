@@ -26,7 +26,7 @@ const News = () => {
   return (
     <div className="font-serif my-20 ">
       <h1 className="text-center font-semibold my-14 text-primary lg:text-4xl text-2xl">
-        NEWS
+       LATEST NEWS
       </h1>
       <div>
         <div className="hidden lg:block">

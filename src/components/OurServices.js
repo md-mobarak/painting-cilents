@@ -41,10 +41,10 @@ const OurServices = (data) => {
                 </p>
                 <div className="card-actions justify-between">
                   <button className="btn btn-secondary btn-xs text-white">
-                    Buy Now
+                    Add To Cart
                   </button>
                   <button className="btn btn-secondary  btn-xs text-white">
-                    Buy Now
+                    Details
                   </button>
                 </div>
               </div>

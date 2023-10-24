@@ -4,6 +4,7 @@ import Gallary from "./Gallary";
 import HeroSection from "./HeroSection";
 import News from "./News";
 import OurServices from "./OurServices";
+import Review from "./Review";
 import WhyChooseUs from "./WhyChooseUs";
 
 const Home = (data) => {
@@ -15,6 +16,7 @@ const Home = (data) => {
         <OurServices data={data}></OurServices>
         <Gallary></Gallary>
         <WhyChooseUs></WhyChooseUs>
+        <Review></Review>
         <News></News>
         <FeedbackFrom></FeedbackFrom>
       </div>

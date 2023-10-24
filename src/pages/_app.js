@@ -1,9 +1,9 @@
 import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import "@/styles/globals.css";
-import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function App({ Component, pageProps }) {
   useEffect(() => {
@@ -11,9 +11,7 @@ export default function App({ Component, pageProps }) {
   }, []);
   return (
     <>
-      <nav>
-        <Navbar />
-      </nav>
+      <nav><Navbar /></nav>
       <Component {...pageProps} />
       <footer>
         <Footer></Footer>
