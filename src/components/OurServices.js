@@ -1,9 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
+import { useRouter } from "next/router";
 import { AiFillFormatPainter } from "react-icons/ai";
 
 const OurServices = (data) => {
   // console.log(data);
+  const router = useRouter();
+  const { pathname } = router;
+  const handleNavigate = (id) => {
+    console.log(id);
+    router.push(`/ProductDetails/${id}`);
+  };
   return (
     <div className="text-center font-serif lg:my-20">
       <section>
@@ -43,7 +50,10 @@ const OurServices = (data) => {
                   <button className="btn btn-secondary btn-xs text-white">
                     Add To Cart
                   </button>
-                  <button className="btn btn-secondary  btn-xs text-white">
+                  <button
+                    onClick={() => handleNavigate(p.id)}
+                    className="btn btn-secondary  btn-xs text-white"
+                  >
                     Details
                   </button>
                 </div>

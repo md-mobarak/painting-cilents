@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Home from "@/components/Home";
-
+import "react-toastify/dist/ReactToastify.css";
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 import ScrollToTop from "react-scroll-to-top";
 // ..
 
@@ -12,8 +14,8 @@ export default function index({ data }) {
     return (
       <main>
         <Home data={data}></Home>
-
         <ScrollToTop smooth color="#3F3B75" />
+  
       </main>
     );
   }

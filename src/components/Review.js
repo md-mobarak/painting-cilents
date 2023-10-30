@@ -46,7 +46,7 @@ const Review = () => {
               >
                 <SwiperSlide>
                   <div>
-                    <p className=" bg-[#d5d4db] px-4 py-3 text-primary text-center text-xl my-3">
+                    <p className=" bg-[#e0e0e0] px-4 py-3 text-primary text-center text-xl my-3">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Harum, sint quibusdam. Doloremque blanditiis facilis
                       mollitia quibusdam ducimus eaque. Aliquid consectetur
@@ -65,7 +65,7 @@ const Review = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <p className=" bg-[#d5d4db] px-4 py-3 text-primary text-center text-xl my-3">
+                    <p className=" bg-[#e0e0e0] px-4 py-3 text-primary text-center text-xl my-3">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Harum, sint quibusdam. Doloremque blanditiis facilis
                       mollitia quibusdam ducimus eaque. Aliquid consectetur
@@ -84,7 +84,7 @@ const Review = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <p className=" bg-[#d5d4db] px-4 py-3 text-primary text-center text-xl my-3">
+                    <p className=" bg-[#e0e0e0] px-4 py-3 text-primary text-center text-xl my-3">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Harum, sint quibusdam. Doloremque blanditiis facilis
                       mollitia quibusdam ducimus eaque. Aliquid consectetur
