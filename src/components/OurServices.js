@@ -1,16 +1,55 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
+import axios from "axios";
 import { useRouter } from "next/router";
 import { AiFillFormatPainter } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const OurServices = (data) => {
   // console.log(data);
   const router = useRouter();
   const { pathname } = router;
   const handleNavigate = (id) => {
-    console.log(id);
+    // console.log(id);
     router.push(`/ProductDetails/${id}`);
   };
+  const handleCartPost = (id) => {
+    const serviceId = id;
+    const quantity = 1;
+    const token = localStorage.getItem("accessToken");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    fetch("http://localhost:5000/api/v1/profile", {
+      method: "GET",
+      headers: headers,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        const userId = data?.data?.id;
+        if (data.success === true) {
+          const cartData = {
+            serviceId,
+            quantity,
+            userId,
+          };
+          axios
+            .post("http://localhost:5000/api/v1/cart", cartData, { headers })
+            .then((res) => {
+              toast.success(res.data.message, {
+                position: toast.POSITION.TOP_CENTER,
+              });
+              // console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      });
+  };
+
   return (
     <div className="text-center font-serif lg:my-20">
       <section>
@@ -47,7 +86,10 @@ const OurServices = (data) => {
                   If a dog chews shoes whose shoes does he choose?
                 </p>
                 <div className="card-actions justify-between">
-                  <button className="btn btn-secondary btn-xs text-white">
+                  <button
+                    onClick={() => handleCartPost(p.id)}
+                    className="btn btn-secondary btn-xs text-white"
+                  >
                     Add To Cart
                   </button>
                   <button

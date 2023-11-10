@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { FaCartArrowDown } from "react-icons/fa";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 
 /* eslint-disable @next/next/no-img-element */
 const Navbar = () => {
   // const [isBlur, setIsBlur] = useState(false);
+  const { pathname } = useRouter();
+  // console.log(pathname)
   const [toggle, setToggle] = useState(false);
   const [token, setToken] = useState(""); // Use state to manage token
   const router = useRouter();
@@ -32,14 +35,14 @@ const Navbar = () => {
         // Handle errors gracefully, e.g., display an error message
         console.log(err);
       });
-  }, [token,user]);
+  }, [token, user]);
 
   useEffect(() => {
     const localToken = localStorage.getItem("accessToken");
     if (localToken) {
       setToken(localToken);
     }
-  }, [user,token]);
+  }, [user, token]);
 
   const logOut = () => {
     localStorage.removeItem("accessToken");
@@ -62,16 +65,54 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block">
           <ul className="flex items-center justify-around space-x-8">
-            <li className="hover:text-primary">Home</li>
-            <li className="hover:text-primary">Service</li>
-            <li className="hover:text-primary">About us</li>
-            <li className="hover:text-primary">Contact us</li>
-            <li className="hover:text-primary">Blog</li>
+            <li
+              className={`hover:text-primary ${
+                pathname === "/" && "text-primary"
+              }`}
+            >
+              Home
+            </li>
+            <li
+              className={`hover:text-primary ${
+                pathname === "/service" && "text-primary"
+              }`}
+            >
+              Service
+            </li>
+            <li
+              className={`hover:text-primary ${
+                pathname === "/about" && "text-primary"
+              }`}
+            >
+              About us
+            </li>
+            <li
+              className={`hover:text-primary ${
+                pathname === "/contact" && "text-primary"
+              }`}
+            >
+              Contact us
+            </li>
+            <li
+              className={`hover:text-primary ${
+                pathname === "/blog" && "text-primary"
+              }`}
+            >
+              Blog
+            </li>
           </ul>
         </div>
         <div className="hidden lg:block">
           <ul className="flex items-center justify-around space-x-8">
-            <li className="hover:text-primary">Cart</li>
+            <li className="hover:text-primary">
+              <Link href="/cartItem">
+                <FaCartArrowDown
+                  className={`hover:text-primary h-5 w-5 ${
+                    pathname === "/cartItem" && "text-primary"
+                  }`}
+                ></FaCartArrowDown>
+              </Link>
+            </li>
             <li className="hover:text-primary">
               {token ? (
                 <div>
@@ -91,12 +132,13 @@ const Navbar = () => {
       </div>
       {toggleUser && (
         <div className="z-40 absolute right-5  ">
-          <div className=" rounded-lg w-40 cursor-pointer  text-center  p-5 shadow-lg text-white bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-600 hover:to-purple-600 ">
+          <div className=" rounded-lg w-40 cursor-pointer  text-center  p-3 shadow-lg text-white bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-600 hover:to-purple-600 ">
             <ul>
-           
-              <li className="hover:text-secondary">Dashboard</li>
-              <li className="hover:text-secondary">My profile</li>
-              {/* <li className="hover:text-secondary">History</li> */}
+              <li className="hover:text-secondary">
+                <Link href="/Dashboard/dashboard">Dashboard</Link>
+              </li>
+              <li className="hover:text-secondary">   <Link href="/profile">My profile</Link></li>
+
               <li className="hover:text-secondary">
                 <Link onClick={() => logOut()} href="/login">
                   Log Out
