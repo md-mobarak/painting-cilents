@@ -3,15 +3,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // import Payment from "@/components/payment/payment";
 // import Payment from "@/components/payment/Payment";
+import BookingDate from "@/components/BookingDate";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const cartItem = () => {
+  const [showDate, setShowDate] = useState(false);
   const [cartItem, setCartItem] = useState([]);
   const [checkOut, setCheckOut] = useState(false);
-  const email = cartItem?.data?.userEmail;
-  const userId = cartItem?.data?.userId;
+  // const email = cartItem?.data?.userEmail;
+  // const userId = cartItem?.data?.userId;
   // console.log(cartItem?.data?.userEmail);
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -105,14 +107,15 @@ const cartItem = () => {
           const total = item.quantity * item?.service?.price;
           return (
             <div className="border p-3 my-5 shadow-xl rounded-xl cart border-secondary">
-              <div className="Lg:grid grid-cols-5 text-center flex justify-around  lg:gap-x-5 text-primary lg:font-semibold lg:my-2">
+              <div className="Lg:grid grid-cols-6 text-center flex justify-around  lg:gap-x-5 text-primary lg:font-semibold lg:my-2">
                 <p>Item</p>
                 <p>Price</p>
                 <p>Quantity</p>
                 <p>Total</p>
+                <p>Booking</p>
                 <p>Action</p>
               </div>
-              <div className="lg:grid grid-cols-5 flex justify-around lg:ml-4 my-2 lg:my-4 text-center text-secondary">
+              <div className="lg:grid grid-cols-6 gap-4  lg:ml-4 my-2 lg:my-4 text-center text-secondary">
                 <div className="flex items-center lg:ml-4">
                   <img
                     className="lg:h-14 lg:w-14 h-8 w-8 rounded-xl"
@@ -145,12 +148,19 @@ const cartItem = () => {
                     +
                   </button>
                 </p>
+
                 <p className="lg:text-xl">${total}</p>
+                <button
+                  onClick={() => setShowDate(!showDate)}
+                  className="hover:bg-secondary cursor-pointer hover:text-white border border-primary rounded-xl mt-4 btn-xs text-primary"
+                >
+                  Booking
+                </button>
                 <p
                   onClick={() => deleteService(item?.id)}
                   className="lg:text-xl flex cursor-pointer justify-center items-center"
                 >
-                  <RiDeleteBin6Line className="text-red-500 "></RiDeleteBin6Line>{" "}
+                  <RiDeleteBin6Line className="text-red-500 "></RiDeleteBin6Line>
                 </p>
               </div>
             </div>
@@ -195,6 +205,11 @@ const cartItem = () => {
           </section>
         )}
       </div>
+      {showDate && (
+        <div className="absolute top-20 right-64">
+          <BookingDate></BookingDate>
+        </div>
+      )}
     </div>
   );
 };

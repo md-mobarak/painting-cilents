@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/rules-of-hooks */
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -7,9 +8,6 @@ const profile = () => {
   const [userProfile, setUserProfile] = useState({});
   const [editProfile, setEditProfile] = useState(false);
   // Check if the user data is available
-  if (!userProfile) {
-    return <p>Loading...</p>;
-  }
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -28,26 +26,66 @@ const profile = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [userProfile]);
   const handleProfile = () => {
     setEditProfile(!editProfile);
   };
-
-  //   const handleUpdateProfile = () => {
-  //     setEditProfile(false);
-  //     };
+  if (!userProfile) {
+    return <p>Loading...</p>;
+  }
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const image = new FormData();
+    image.append("image", data?.profileImg[0]);
+    try {
+      const response = await axios?.post(
+        "https://api.imgbb.com/1/upload?key=85550ec4bf046ba661f38ebd86e505ac",
+        image
+      );
+
+      if (response?.data?.data?.display_url) {
+        const userData = {
+          username: data.username,
+          email: data.email,
+          location: data.location,
+          contactNo: data.contactNo,
+          address: data.address,
+          profileImg: response?.data?.data?.display_url,
+        };
+
+        const token = localStorage.getItem("accessToken");
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        const updateResponse = await fetch(
+          `http://localhost:5000/api/v1/users/${userProfile?.data?.id}`,
+          {
+            method: "PATCH",
+            headers: headers,
+            body: JSON.stringify(userData),
+          }
+        );
+
+        if (updateResponse.ok) {
+          console.log("User data updated successfully");
+          setEditProfile(false);
+          // You may want to fetch the updated user data and setUserProfile again
+          // Example: fetchUpdatedUserData();
+        } else {
+          console.error(
+            "Failed to update user data:",
+            updateResponse.statusText
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error during update:", error);
+    }
+
     reset();
-    // try {
-    //   const response = await axios.post('/api/upload-service', data);
-    //   console.log('Service uploaded:', response.data);
-    //   // Add any further actions here, like redirecting to a success page
-    // } catch (error) {
-    //   console.error('Service upload failed:', error);
-    // }
   };
 
   const handleCancelEdit = () => {
@@ -60,13 +98,15 @@ const profile = () => {
     <div
       className={`min-h-screen ${
         !editProfile && "flex justify-center items-center"
-      } bg-gradient-to-r from-neutral via-indigo-500 to-primary text-white`}
+      } bg-gradient-to-r from-neutral via-indigo-500 to-primary `}
     >
       {!editProfile && (
-        <div className={`border border-white p-4 rounded-xl my-10 shadow-2xl`}>
+        <div
+          className={`border text-white border-white p-4 rounded-xl my-10 shadow-2xl`}
+        >
           <div className="text-center mb-3">
             <h1 className="text-2xl font-bold uppercase">
-              {userProfile?.data?.username} Profile
+              {userProfile?.data?.username}
             </h1>
           </div>
           <div className="flex items-center justify-center mb-8">
@@ -114,28 +154,34 @@ const profile = () => {
             className={`border border-white p-10 rounded-xl shadow-2xl`}
             onSubmit={handleSubmit(onSubmit)}
           >
-            <h1 className="text-center text-2xl uppercase font-semibold">
+            <h1 className="text-center text-white text-2xl uppercase font-semibold">
               Edit Profile
             </h1>
             <div className="mb-4">
-              <label htmlFor="name" className="block text-lg font-semibold">
+              <label
+                htmlFor="username"
+                className="block text-lg text-white  font-semibold"
+              >
                 Name:
               </label>
               <input
                 type="text"
-                id="name"
-                {...register("name", { required: true })}
-                placeholder="Type here"
+                id="username"
+                {...register("username", { required: true })}
+                placeholder="Type Name"
                 className="input input-bordered w-full rounded-none"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-lg font-semibold">
+              <label
+                htmlFor="email"
+                className="block text-lg text-white  font-semibold"
+              >
                 Email:
               </label>
               <input
                 type="email"
-                disabled
+                readOnly
                 id="email"
                 {...register("email", { required: true })}
                 value={userProfile?.data?.email}
@@ -143,11 +189,10 @@ const profile = () => {
                 className="input input-bordered w-full rounded-none"
               />
             </div>
-
             <div className="mb-4">
               <label
                 htmlFor="contactNo"
-                className="block text-lg font-semibold"
+                className="block text-white  text-lg font-semibold"
               >
                 Contact No:
               </label>
@@ -160,7 +205,10 @@ const profile = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="address" className="block text-lg font-semibold">
+              <label
+                htmlFor="address"
+                className="block text-white  text-lg font-semibold"
+              >
                 Address:
               </label>
               <input
@@ -171,56 +219,61 @@ const profile = () => {
                 className="input input-bordered w-full rounded-none"
               />
             </div>
-            <div className="mb-4">
-              <label htmlFor="address" className="block text-lg font-semibold">
-                Old Password
+            {/* <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-white  text-lg font-semibold"
+              >
+                Old Password:
               </label>
               <input
                 type="password"
-                {...register("password", { required: true })}
                 id="password"
+                {...register("password", { required: true })}
                 placeholder="Type here"
                 className="input input-bordered w-full rounded-none"
               />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="address" className="block text-lg font-semibold">
-                New Password
+            </div> */}
+            {/* <div className="mb-4">
+              <label
+                htmlFor="newPassword"
+                className="block text-white  text-lg font-semibold"
+              >
+                New Password:
               </label>
               <input
+                type="password"
+                id="newPassword"
                 {...register("newPassword", { required: true })}
-                type="newPassword"
-                id="address"
                 placeholder="Type here"
                 className="input input-bordered w-full rounded-none"
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="profileImg"
-                className="block text-lg font-semibold"
+                className="block text-white text-lg font-semibold"
               >
                 Profile Image URL:
               </label>
               <input
                 type="file"
                 id="profileImg"
-                placeholder="Paste URL here"
                 {...register("profileImg", { required: true })}
-                // value={userProfile?.data?.profileImg}
-                // onChange={(e) => setProfileImg(e.target.value)}
-                className="input input-bordered w-full rounded-none"
+                placeholder="Paste URL here"
+                className="input  input-bordered w-full rounded-none"
               />
             </div>
             <div className="flex justify-around">
               <button
-                // onClick={handleUpdateProfile}
+                type="submit"
                 className="btn btn-sm bg-gradient-to-r from-neutral via-indigo-500 to-primary text-white"
               >
                 Save
               </button>
               <button
-                onClick={handleCancelEdit}
+                type="button"
+                onClick={handleProfile}
                 className="btn ml-2  btn-error btn-sm border bg-red-500 border-white text-white"
               >
                 Cancel

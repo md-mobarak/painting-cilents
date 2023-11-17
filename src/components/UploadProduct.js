@@ -1,48 +1,41 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const UploadProduct = () => {
-  // const handleSubmit = async (event) => {
-  //     event.preventDefault();
-  //     const formData = new FormData(event.target);
-
-  //     try {
-  //       const response = await axios.post('/api/upload-service', formData);
-  //       console.log('Service uploaded:', response.data);
-  //       // Add any further actions here, like redirecting to a success page
-  //     } catch (error) {
-  //       console.error('Service upload failed:', error);
-  //     }
-  //   };
-  //   const [service, setService] = useState({
-  //     title: "",
-  //     description: "",
-  //     category: "",
-  //     price: 0,
-  //     images: "",
-  //     available: true,
-  //   });
-
-  //   const handleInputChange = (e) => {
-  //     const { name, value } = e.target;
-  //     setService({ ...service, [name]: value });
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     // You can send the service data to your backend or perform any other actions here
-  //     console.log("Service data submitted:", service);
-  //   };
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
     console.log(data);
+    const price = Number(data.price);
+    const newData = {
+     title: data.title,
+     images: data.images,
+     category: data.category,
+     description: data.description,
+      price: price,
+      available:data.available
+  }
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/painting/create-painting",
+        newData
+      );
+      console.log("Service uploaded:", response.data);
+      if (response.data) {
+        toast.success("Successfully done Service Post", {
+          position: toast.POSITION.TOP_CENTER,
+          transition: swirl,
+        });
+      }
+
+      // Add any further actions here, like redirecting to a success page
+    } catch (error) {
+      console.error("Service upload failed:", error);
+    }
+
     reset();
-    // try {
-    //   const response = await axios.post('/api/upload-service', data);
-    //   console.log('Service uploaded:', response.data);
-    //   // Add any further actions here, like redirecting to a success page
-    // } catch (error) {
-    //   console.error('Service upload failed:', error);
-    // }
   };
   return (
     <div className=" rounded-lg px-4   custom ">

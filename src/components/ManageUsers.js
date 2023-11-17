@@ -10,8 +10,16 @@ const ManageUsers = () => {
   const [size, setSize] = useState(7);
 
   useEffect(() => {
+    const token = localStorage.getItem("accessToken");
     // Fetch user data from the backend API with pagination parameters
-    fetch(`http://localhost:5000/api/v1/users?page=${page}&size=${size}`)
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    };
+    fetch(`http://localhost:5000/api/v1/users?page=${page}&size=${size}`, {
+      method: "GET",
+      headers: headers,
+    })
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -19,10 +27,10 @@ const ManageUsers = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [page, size,users]); // Re-fetch data when page or size changes
+  }, [page, size, users]); // Re-fetch data when page or size changes
   if (!users) {
-  return <h1>loading...</h1>
-}
+    return <h1>loading...</h1>;
+  }
   // Handle pagination navigation
   const handlePreviousPage = () => {
     if (page > 1) {
@@ -35,7 +43,6 @@ const ManageUsers = () => {
       setPage(page + 1);
     }
   };
-
 
   const handleDeleteUser = (userId) => {
     // Implement the logic to delete a user by making a DELETE request to your API
@@ -53,12 +60,15 @@ const ManageUsers = () => {
   };
 
   const handleMakeAdmin = (userId) => {
+    const token = localStorage.getItem("accessToken");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    };
     // Implement the logic to make a user admin by making a PATCH request to your API
-    fetch(`http://localhost:5000/api/users/${userId}`, {
+    fetch(`http://localhost:5000/api/v1/users/role/${userId}`, {
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: headers,
       body: JSON.stringify({ role: "admin" }), // Replace with your API's expected request body
     })
       .then((res) => res.json())
@@ -71,8 +81,9 @@ const ManageUsers = () => {
       });
   };
 
-  return (
+  // console.log(users);
 
+  return (
     <div>
       <div className="overflow-x-auto p-2">
         <table className="table">
@@ -84,41 +95,50 @@ const ManageUsers = () => {
               <th className="text-neutral">Email</th>
               <th className="text-neutral">Image</th>
               <th className="text-neutral">Action</th>
-              <th className="text-neutral">Make Admin</th>
+              {users?.meta?.role === "super-admin" && (
+                <th className="text-neutral">Make Admin</th>
+              )}
+              <th className="text-neutral">Role</th>
             </tr>
           </thead>
           {/* Table Body */}
           <tbody>
-            {users?.user.map((user, index) => (
-              <tr key={user.id} className="bg-base-200">
-                <td>{index + 1}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>
-                  <img
-                    className="w-12 h-12 rounded-full"
-                    src={user.profileImg}
-                    alt={user.username}
-                  />
-                </td>
-                <td>
-                  <p
-                    onClick={() => handleDeleteUser(user.id)}
-                    className="flex cursor-pointer justify-center items-center"
-                  >
-                    <RiDeleteBin6Line className="text-red-500 h-6 w-6"></RiDeleteBin6Line>
-                  </p>
-                </td>
-                <td>
-                  <button
-                    onClick={() => handleMakeAdmin(user.id)}
-                    className="btn btn-neutral btn-xs text-white"
-                  >
-                    Make Admin
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {users?.user?.map((user, index) => {
+              //  console.log(user)
+              return (
+                <tr key={user.id} className="bg-base-200">
+                  <td>{index + 1}</td>
+                  <td>{user?.username}</td>
+                  <td>{user?.email}</td>
+                  <td>
+                    <img
+                      className="w-12 h-12 rounded-full"
+                      src={user?.profileImg}
+                      alt={user?.username}
+                    />
+                  </td>
+                  <td>
+                    <p
+                      onClick={() => handleDeleteUser(user.id)}
+                      className="flex cursor-pointer justify-center items-center"
+                    >
+                      <RiDeleteBin6Line className="text-red-500 h-6 w-6"></RiDeleteBin6Line>
+                    </p>
+                  </td>
+                  <td>
+                    {users?.meta?.role === "super-admin" && (
+                      <button
+                        onClick={() => handleMakeAdmin(user.id)}
+                        className="btn btn-neutral btn-xs text-white"
+                      >
+                        Make Admin
+                      </button>
+                    )}
+                  </td>
+                  <td className=" text-neutral font-semibold">{user?.role}</td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         {/* Pagination */}
