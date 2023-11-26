@@ -1,19 +1,38 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react/jsx-key */
+/* eslint-disable react-hooks/exhaustive-deps */
 // import { singleUser } from "@/components/utils/singleUser";
-
+/* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AiFillStar } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-/* eslint-disable @next/next/no-img-element */
-const ProductDetails = async ({ data }) => {
+const renderStars = (rating) => {
+  const filledStars = Array.from({ length: rating }, (_, index) => (
+    <span key={index}>&#9733;</span>
+  ));
+
+  const emptyStars = Array.from({ length: 5 - rating }, (_, index) => (
+    <span key={index + rating}>&#9734;</span>
+  ));
+
+  return (
+    <div className="text-yellow-400 text-2xl">
+      {filledStars}
+      {emptyStars}
+    </div>
+  );
+};
+
+const ProductDetails = ({ data }) => {
+  const [comments, setComments] = useState([]);
   const [userId, setUserId] = useState("");
-  const [loading, setLoading] = useState(true); // Add loading state
-  console.log(userId);
   const serviceId = data?.data?.id;
   const quantity = 1;
-  console.log(data);
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -27,10 +46,21 @@ const ProductDetails = async ({ data }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        // setUserId(data?.data?.id);
+        setUserId(data?.data?.id);
       });
   }, [userId]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/review/${data?.data?.id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setComments(data);
+      }).catch((err)=>{
+        console.log(err)
+      })
+  }, []);
 
   const handleCartPost = () => {
     const token = localStorage.getItem("accessToken");
@@ -57,7 +87,7 @@ const ProductDetails = async ({ data }) => {
   const { register, handleSubmit, errors, reset } = useForm();
   const onSubmit = async (data2) => {
     const serviceId = data?.data?.id;
-    const rating = data2?.rating;
+    const rating = Number(data2?.rating);
     const comment = data2?.comment;
     const token = localStorage.getItem("accessToken");
     const headers = {
@@ -76,25 +106,17 @@ const ProductDetails = async ({ data }) => {
         commentData,
         { headers }
       );
-      console.log("comments posted:", response.data);
       if (response.data) {
-        toast.success("Successfully done Service Post", {
-          position: toast.POSITION.TOP_CENTER,
-          transition: swirl,
-        });
+        toast.success("Successfully done Comment Post");
       }
-
-      // Add any further actions here, like redirecting to a success page
     } catch (error) {
+      toast.error("You are not user");
       console.error("Service upload failed:", error);
     }
 
     reset();
   };
-  // Add a loading check before rendering the component
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <div className="p-20  font-serif">
       <div className="lg:grid grid-cols-2 space-x-5 items-center">
@@ -126,27 +148,32 @@ const ProductDetails = async ({ data }) => {
         <h1 className="text-center font-bold lg:text-4xl text-xl text-primary">
           Product Reviews
         </h1>
-        <div className="flex justify-center lg:block">
-          <div className="card w-96 my-8 shadow-xl p-5 border border-secondary">
-            <h3 className="text-xl  font-semibold">Name: jhone deo</h3>
-            <h4 className="flex items-center my-4 justify-start ">
-              <span className="text-xl font-semibold text-primary">
-                Rating:
-              </span>{" "}
-              <AiFillStar className="text-yellow-500 h-5 w-5"></AiFillStar>
-              <AiFillStar className="text-yellow-500 h-5 w-5"></AiFillStar>
-              <AiFillStar className="text-yellow-500 h-5 w-5"></AiFillStar>
-              <AiFillStar className="text-yellow-500 h-5 w-5"></AiFillStar>
-              <AiFillStar className="text-yellow-500 h-5 w-5"></AiFillStar>
-            </h4>
-            <p className="text-justify">
-              Comments: Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Omnis molestias maiores officiis labore cumque nemo ipsa commodi
-              qui quod recusandae autem sunt delectus minima adipisci, explicabo
-              accusamus quo. Qui, eaque.
-            </p>
-          </div>
+
+        <div className="lg:grid grid-cols-3 gap-4 ">
+          {comments?.data?.map((r) => {
+            const rating = r.rating;
+            return (
+              <div className="flex justify-center lg:block">
+                <div className="card w-96 my-8 shadow-xl p-5 border border-secondary">
+                  <h3 className="text-xl  font-semibold">Name: jhone deo</h3>
+                  <h4 className="flex items-center my-4 justify-start ">
+                    <span className="text-xl font-semibold text-primary">
+                      Rating:
+                    </span>
+                    {renderStars(rating)}
+                  </h4>
+                  <p className="text-justify">
+                    Comments: Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Omnis molestias maiores officiis labore cumque nemo
+                    ipsa commodi qui quod recusandae autem sunt delectus minima
+                    adipisci, explicabo accusamus quo. Qui, eaque.
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
+
         {/* Reviews Form  */}
         <div>
           <h1 className="text-center my-4 font-bold lg:text-4xl text-xl text-primary">
@@ -194,17 +221,16 @@ const ProductDetails = async ({ data }) => {
 
 export default ProductDetails;
 
-// Define the getServerSideProps function
 export async function getServerSideProps(context) {
   try {
     const { params } = context;
     const id = params?.details_id;
-    // Fetch data from an API or any other data source
     const res = await fetch(`http://localhost:5000/api/v1/painting/${id}`);
 
-    if (!res?.ok) {
+    if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
+
     const data = await res.json();
 
     return {

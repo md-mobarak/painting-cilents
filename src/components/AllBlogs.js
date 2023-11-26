@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-key */
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /* eslint-disable @next/next/no-img-element */
 const AllBlogs = () => {
@@ -40,32 +42,75 @@ const AllBlogs = () => {
       setPage(page + 1);
     }
   };
-
   const handleDelete = (id) => {
-    window.alert("Are you suer?");
     const token = localStorage.getItem("accessToken");
     const headers = {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     };
-    fetch(`http://localhost:5000/api/v1/blogs/${id}`, {
-      method: "DELETE",
-      headers: headers,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (data.success === true) {
-          toast.success("Successfully Deleted Blogs", {
-            position: toast.POSITION.TOP_CENTER,
-            transition: swirl,
-          });
-        }
+
+    try {
+      fetch(`http://localhost:5000/api/v1/blogs/${id}`, {
+        method: "DELETE",
+        headers: headers,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to delete review. Status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.success === true) {
+            toast.success("Successfully Deleted Service", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
+          // Handle success if needed
+        })
+        .catch((err) => {
+          if (err) {
+            toast.error("You are not addmin", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
+        });
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      if (error) {
+        toast.error("You are not addmin", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
   };
+
+  // const handleDelete = (id) => {
+  //   window.alert("Are you suer?");
+  //   const token = localStorage.getItem("accessToken");
+  //   const headers = {
+  //     "Content-Type": "application/json",
+  //     authorization: `Bearer ${token}`,
+  //   };
+  //   fetch(`http://localhost:5000/api/v1/blogs/${id}`, {
+  //     method: "DELETE",
+  //     headers: headers,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log(data);
+  //       if (data.success === true) {
+  //         toast.success("Successfully Deleted Blogs", {
+  //           position: toast.POSITION.TOP_CENTER,
+  //           transition: swirl,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   return (
     <div className="p-10">

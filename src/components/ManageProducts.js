@@ -21,24 +21,68 @@ const ManageProducts = () => {
         console.log(err);
       });
   }, []);
-  const handleDelete = (id) => {
-    window.alert("Are you suer?");
-    fetch(`http://localhost:5000/api/v1/painting/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.success === true) {
-          toast.success("Successfully Deleted Service", {
-            position: toast.POSITION.TOP_CENTER,
-            transition: swirl,
-          });
-        }
+  // const handleDelete = (id) => {
+  //   window.alert("Are you suer?");
+  //   fetch(`http://localhost:5000/api/v1/painting/${id}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data.success === true) {
+  //         toast.success("Successfully Deleted Service", {
+  //           position: toast.POSITION.TOP_CENTER,
+  //           transition: swirl,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const handleDelete = (Id) => {
+    const token = localStorage.getItem("accessToken");
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    };
+
+    try {
+      fetch(`http://localhost:5000/api/v1/painting/${id}`, {
+        method: "DELETE",
+        headers: headers,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to delete review. Status: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.success === true) {
+            toast.success("Successfully Deleted Service", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
+          // Handle success if needed
+        })
+        .catch((err) => {
+          if (err) {
+            toast.error("You are not addmin", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+          }
+        });
+    } catch (error) {
+      console.error("An unexpected error occurred:", error);
+      if (error) {
+        toast.error("You are not addmin", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
   };
   const { register, handleSubmit, errors, reset } = useForm();
   const onSubmit = async (data) => {

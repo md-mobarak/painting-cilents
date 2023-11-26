@@ -65,20 +65,25 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block">
           <ul className="flex items-center justify-around space-x-8">
+          <Link href="/">
             <li
               className={`hover:text-primary ${
                 pathname === "/" && "text-primary"
               }`}
             >
               Home
-            </li>
+              </li>
+              </Link>
+              <Link href="/services">
             <li
               className={`hover:text-primary ${
-                pathname === "/service" && "text-primary"
+                pathname === "/services" && "text-primary"
               }`}
             >
               Service
             </li>
+            </Link>
+            <Link href="/about">
             <li
               className={`hover:text-primary ${
                 pathname === "/about" && "text-primary"
@@ -86,6 +91,8 @@ const Navbar = () => {
             >
               About us
             </li>
+            </Link>
+            <Link href="/contact">
             <li
               className={`hover:text-primary ${
                 pathname === "/contact" && "text-primary"
@@ -93,13 +100,16 @@ const Navbar = () => {
             >
               Contact us
             </li>
+            </Link>
+            <Link href="/blogs">
             <li
               className={`hover:text-primary ${
-                pathname === "/blog" && "text-primary"
+                pathname === "/blogs" && "text-primary"
               }`}
             >
               Blog
             </li>
+            </Link>
           </ul>
         </div>
         <div className="hidden lg:block">

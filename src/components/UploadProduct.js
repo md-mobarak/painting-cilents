@@ -10,13 +10,13 @@ const UploadProduct = () => {
     console.log(data);
     const price = Number(data.price);
     const newData = {
-     title: data.title,
-     images: data.images,
-     category: data.category,
-     description: data.description,
+      title: data.title,
+      images: data.images,
+      category: data.category,
+      description: data.description,
       price: price,
-      available:data.available
-  }
+      available: data.available,
+    };
     try {
       const response = await axios.post(
         "http://localhost:5000/api/v1/painting/create-painting",
@@ -78,13 +78,24 @@ const UploadProduct = () => {
           <label htmlFor="category" className="block text-gray-600">
             Category
           </label>
-          <input
+          <select
+            id="category"
+            {...register("category")}
+            className="w-full border p-2 rounded input input-bordered input-secondary"
+          >
+            <option value="painting">Painting</option>
+            <option value="InteriorPainting">Interior Painting</option>
+            <option value="ExteriorPainting">Exterior Painting</option>
+            <option value="ResidentialPainting">Residential Painting</option>
+            {/* Add more categories as needed */}
+          </select>
+          {/* <input
             type="text"
             id="category"
             {...register("category")}
             placeholder="Type Category"
             className="input input-bordered input-secondary w-full "
-          />
+          /> */}
         </div>
 
         <div className="mb-4">

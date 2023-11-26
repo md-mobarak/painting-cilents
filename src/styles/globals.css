@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles/tailwind.css */
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+
+.pagination li {
+  margin: 0 4px;
+}
+
+.pagination a,
+.pagination span {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #00c898;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+  background-color: #2c5282;
+}
+
+.pagination .active {
+  background-color: #2c5282;
+}
+
 .custom {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 16px;
