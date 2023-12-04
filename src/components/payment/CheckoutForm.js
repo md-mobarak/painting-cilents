@@ -12,21 +12,21 @@ const CheckoutForm = ({ grandTotal, email, setCheckOut, checkOut, id }) => {
   const [paymetnAll, setPaymentAll] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/payment")
+    fetch("https://painting-server-9.vercel.app/payment")
       .then((res) => res.json())
       .then((data) => {
         // console.log(data.payments);
         setPaymentAll(data.payments);
       });
 
-    // fetch("http://localhost:5000/cart")
+    // fetch("https://painting-server-9.vercel.app/cart")
     //   .then((res) => res.json())
     //   .then((data) => {
     //     // console.log(data.carts);
     //     setCart(data.carts);
     //   });
 
-    fetch("http://localhost:5000/create-payment-intent", {
+    fetch("https://painting-server-9.vercel.app/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -21,7 +21,7 @@ const OurServices = (data) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    fetch("http://localhost:5000/api/v1/profile", {
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
       method: "GET",
       headers: headers,
     })
@@ -36,7 +36,11 @@ const OurServices = (data) => {
             userId,
           };
           axios
-            .post("http://localhost:5000/api/v1/cart", cartData, { headers })
+            .post(
+              "https://painting-server-9.vercel.app/api/v1/cart",
+              cartData,
+              { headers }
+            )
             .then((res) => {
               toast.success(res.data.message, {
                 position: toast.POSITION.TOP_CENTER,

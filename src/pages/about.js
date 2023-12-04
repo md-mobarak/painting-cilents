@@ -6,7 +6,10 @@ import { GoStarFill } from "react-icons/go";
 const about = () => {
   return (
     <div className="font-serif">
-       <div
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-anchor-placement="top-bottom"
         className="relative h-64 md:h-96 bg-cover bg-center"
         style={{
           backgroundImage:
@@ -15,7 +18,7 @@ const about = () => {
       >
         <div className="absolute inset-0 bg-primary bg-opacity-40 backdrop-filter backdrop-blur-sm">
           <h1 className="text-4xl pt-20 text-center font-bold text-secondary ">
-          About Us
+            About Us
           </h1>
           <p className="text-center text-xl my-8 text-white">
             We have everything you need to bring your vision to life, from our
@@ -26,8 +29,8 @@ const about = () => {
           </div>
         </div>
       </div>
-  
-      <div className="flex justify-between space-10 my-20 ">
+
+      <div className="lg:flex justify-between space-10 my-20 ">
         <section className="p-6 my-10 w-10/12">
           <h1 className="text-4xl font-bold text-primary">
             We ll help you design a space you ll love for years.
@@ -39,7 +42,7 @@ const about = () => {
             to earn your trust and business by giving you reliable and excellent
             service.
           </p>
-          <div className="grid grid-cols-2 gap-x-5 my-5 bg-indigo-100 p-5 rounded-xl">
+          <div className="lg:grid grid-cols-2 gap-x-5 my-5 bg-indigo-100 p-5 rounded-xl">
             <div className="flex items-center mt-2  ">
               <p className="bg-indigo-500 mx-2 p-5 rounded-full">
                 <GoStarFill className="h-5 w-5 text-white"></GoStarFill>
@@ -225,7 +228,7 @@ const about = () => {
           </div>
         </div>
       </section>
-      <section className="p-20 flex items-center justify-around space-x-10 bg-indigo-100">
+      <section className="p-20 lg:flex items-center justify-around space-x-10 bg-indigo-100">
         <div className="w-10/12">
           <img
             className="rounded-xl"

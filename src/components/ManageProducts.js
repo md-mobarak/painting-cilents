@@ -9,10 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 const ManageProducts = () => {
   const [serviceData, setServiceData] = useState();
   const [editService, setEditService] = useState(false);
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(3);
   const [serviceId, setServiceId] = useState("");
-  // console.log(serviceId)
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/painting/service")
+    fetch(
+      `https://painting-server-9.vercel.app/api/v1/painting/service?page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setServiceData(data);
@@ -20,10 +24,10 @@ const ManageProducts = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [serviceData, page, size]);
   // const handleDelete = (id) => {
   //   window.alert("Are you suer?");
-  //   fetch(`http://localhost:5000/api/v1/painting/${id}`, {
+  //   fetch(`https://painting-server-9.vercel.app/api/v1/painting/${id}`, {
   //     method: "DELETE",
   //   })
   //     .then((res) => res.json())
@@ -49,7 +53,7 @@ const ManageProducts = () => {
     };
 
     try {
-      fetch(`http://localhost:5000/api/v1/painting/${id}`, {
+      fetch(`https://painting-server-9.vercel.app/api/v1/painting/${Id}`, {
         method: "DELETE",
         headers: headers,
       })
@@ -84,6 +88,21 @@ const ManageProducts = () => {
       }
     }
   };
+  const handlePreviousPage = () => {
+    console.log(page);
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    console.log(page);
+    // Assuming totalPage is provided in the API response
+    if (page < serviceData?.meta?.totalPage) {
+      setPage(page + 1);
+    }
+  };
+
   const { register, handleSubmit, errors, reset } = useForm();
   const onSubmit = async (data) => {
     // console.log(serviceId);
@@ -100,7 +119,7 @@ const ManageProducts = () => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/v1/painting/update-painting/${serviceId}`,
+        `https://painting-server-9.vercel.app/api/v1/painting/update-painting/${serviceId}`,
         updatedData
       );
 
@@ -117,7 +136,6 @@ const ManageProducts = () => {
     } catch (error) {
       console.error("Service update failed:", error);
     }
-
     reset();
     setEditService(!editService);
   };
@@ -133,45 +151,63 @@ const ManageProducts = () => {
         </h1>
       )}
       {!editService && (
-        <section className="lg:grid  grid-cols-3 p-10 gap-5 font-serif">
-          {serviceData?.data?.map((p) => {
-            return (
-              <div
-                data-aos="fade-up"
-                data-aos-duration="2000"
-                data-aos-anchor-placement="top-bottom"
-                className="card  border border-neutral card-compact w-64 text-black  bg-base-100 shadow-xl"
-              >
-                <figure>
-                  <img
-                    className="w-[250px] h-[200px] rounded-xl p-2"
-                    src={p.images}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Shoes!</h2>
-                  <p className="text-xl">
-                    If a dog chews shoes whose shoes does he choose?
-                  </p>
-                  <div className="card-actions justify-between">
-                    <button
-                      onClick={() => handleEditService(p.id)}
-                      className="btn btn-neutral btn-xs text-white"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={() => handleDelete(p.id)}
-                      className="btn btn-error btn-xs text-white"
-                    >
-                      Delete
-                    </button>
+        <section>
+          <div className="lg:grid  grid-cols-3 p-10 gap-5 font-serif">
+            {serviceData?.data?.map((p) => {
+              return (
+                <div
+                  data-aos="fade-up"
+                  data-aos-duration="2000"
+                  data-aos-anchor-placement="top-bottom"
+                  className="card  border border-neutral card-compact w-64 text-black  bg-base-100 shadow-xl"
+                >
+                  
+                  <figure>
+                    <img
+                      className="w-[250px] h-[200px] rounded-xl p-2"
+                      src={p.images}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">Shoes!</h2>
+                    <p className="text-xl">
+                      If a dog chews shoes whose shoes does he choose?
+                    </p>
+                    <div className="card-actions justify-between">
+                      <button
+                        onClick={() => handleEditService(p.id)}
+                        className="btn btn-neutral btn-xs text-white"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDelete(p.id)}
+                        className="btn btn-error btn-xs text-white"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+          <div className="flex items-center justify-center mt-8">
+            <button
+              onClick={handlePreviousPage}
+              className="join-item btn btn-primary btn-xs text-white"
+            >
+              Previous
+            </button>
+            <span className="mx-3 font-semibold">Page Number: {page}</span>
+            <button
+              onClick={handleNextPage}
+              className="join-item btn btn-primary btn-xs text-white"
+            >
+              Next
+            </button>
+          </div>
         </section>
       )}
 

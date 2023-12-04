@@ -17,17 +17,17 @@ const OurBlogPost = () => {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       };
-    
+
       const response = await axios.post(
-        "http://localhost:5000/api/v1/blogs/",
+        "https://painting-server-9.vercel.app/api/v1/blogs/",
         {
           title,
-          img_url :imageUrl,
+          img_url: imageUrl,
           description,
         },
         { headers }
       );
-console.log(response);
+      console.log(response);
       if (response.status === 200) {
         toast.success("Successfully done blog post", {
           position: toast.POSITION.TOP_CENTER,

@@ -11,17 +11,18 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 const cartItem = () => {
   const [showDate, setShowDate] = useState(false);
   const [cartItem, setCartItem] = useState([]);
+  const [allCartItem, setAllCartItem] = useState([]);
   const [checkOut, setCheckOut] = useState(false);
   // const email = cartItem?.data?.userEmail;
   // const userId = cartItem?.data?.userId;
-  // console.log(cartItem?.data?.userEmail);
+  // console.log(allCartItem);
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    fetch("http://localhost:5000/api/v1/user-cart", {
+    fetch("https://painting-server-9.vercel.app/api/v1/user-cart", {
       method: "GET",
       headers: headers,
     })
@@ -34,6 +35,27 @@ const cartItem = () => {
         console.log(err);
       });
   }, [cartItem]);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    fetch("https://painting-server-9.vercel.app/api/v1/all-cart", {
+      method: "GET",
+      headers: headers,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setAllCartItem(data);
+        // console.log(data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [allCartItem]);
+
   const deleteService = async (id) => {
     window.alert("Are you sure?");
     // console.log(id)
@@ -42,7 +64,7 @@ const cartItem = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    await fetch(`http://localhost:5000/api/v1/cart/${id}`, {
+    await fetch(`https://painting-server-9.vercel.app/api/v1/cart/${id}`, {
       method: "DELETE",
       "Content-Type": "application/json",
       // headers: headers,
@@ -58,7 +80,10 @@ const cartItem = () => {
   const handleUpdateQuantityDecrease = (id, newQuantity) => {
     const quantity = { quantity: newQuantity - 1 };
     axios
-      .patch(`http://localhost:5000/api/v1/cart-update/${id}`, quantity)
+      .patch(
+        `https://painting-server-9.vercel.app/api/v1/cart-update/${id}`,
+        quantity
+      )
       .then((response) => {
         // Handle the success response
         console.log("Update successful:", response.data);
@@ -70,12 +95,14 @@ const cartItem = () => {
         // You can display an error message to the user or perform other error-handling actions
       });
   };
-
   const handleUpdateQuantityIncrease = (id, newQuantity) => {
     // const
     const quantity = { quantity: newQuantity + 1 };
     axios
-      .patch(`http://localhost:5000/api/v1/cart-update/${id}`, quantity)
+      .patch(
+        `https://painting-server-9.vercel.app/api/v1/cart-update/${id}`,
+        quantity
+      )
       .then((response) => {
         // Handle the success response
         console.log("Update successful:", response.data);
@@ -106,7 +133,12 @@ const cartItem = () => {
         {cartItem?.data?.result?.result?.map((item) => {
           const total = item.quantity * item?.service?.price;
           return (
-            <div className="border p-3 my-5 shadow-xl rounded-xl cart border-secondary">
+            <div
+              data-aos="fade-down"
+              data-aos-duration="2000"
+              data-aos-anchor-placement="top-bottom"
+              className="border p-3 my-5 shadow-xl rounded-xl cart border-secondary"
+            >
               <div className="Lg:grid grid-cols-6 text-center flex justify-around  lg:gap-x-5 text-primary lg:font-semibold lg:my-2">
                 <p>Item</p>
                 <p>Price</p>

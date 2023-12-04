@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 // /* eslint-disable @next/next/no-img-element */
 // /* eslint-disable react-hooks/exhaustive-deps */
 
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const Services = () => {
@@ -11,18 +13,18 @@ const Services = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(3);
+  const [size, setSize] = useState(6);
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/v1/painting/service?page=${page}&size=${size}&search=${searchTerm}&category=${selectedCategory}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+          `https://painting-server-9.vercel.app/api/v1/painting/service?page=${page}&size=${size}&search=${searchTerm}&category=${selectedCategory}&minPrice=${minPrice}&maxPrice=${maxPrice}`
         );
         const data = await response.json();
         setServices(data.data);
-        console.log(data);
-        setServices2(data)
+        // console.log(data);
+        setServices2(data);
       } catch (error) {
         console.error(error);
       }
@@ -45,11 +47,22 @@ const Services = () => {
       setPage(page + 1);
     }
   };
+  const router = useRouter();
+  const { pathname } = router;
+  const handleNavigate = (id) => {
+    // console.log(id);
+    router.push(`/ProductDetails/${id}`);
+  };
 
   return (
     <div className="flex flex-col md:flex-row px-10">
       {/* Sidebar - Filters */}
-      <aside className="md:w-1/4 p-4 bg-gray-200">
+      <aside
+        data-aos="fade-left"
+        data-aos-duration="1000"
+        data-aos-anchor-placement="top-bottom"
+        className="md:w-1/4 p-4 bg-gray-200"
+      >
         <h2 className="text-lg font-semibold mb-4">Filter Options</h2>
 
         {/* Category Filter */}
@@ -122,7 +135,12 @@ const Services = () => {
         </div>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          data-aos="fade-up"
+          data-aos-duration="2000"
+          data-aos-anchor-placement="top-bottom"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {/* Display services for the current page */}
           {services?.map((service) => (
             <div key={service.id} className="bg-white p-4 rounded-lg shadow-md">
@@ -140,7 +158,10 @@ const Services = () => {
               <p className="text-gray-400 text-sm mb-2">
                 Price:$ {service.price}
               </p>
-              <button className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
+              <button
+                onClick={() => handleNavigate(service.id)}
+                className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
+              >
                 Details
               </button>
             </div>

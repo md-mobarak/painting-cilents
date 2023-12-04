@@ -31,49 +31,49 @@ const Dashboard = () => {
     setBlogPosts(false);
     setManageProduct(false);
     setManageUser(false);
-    setAllBlog(false)
-    setAllBlog(false)
-    setReviews(false)
+    setAllBlog(false);
+    setAllBlog(false);
+    setReviews(false);
   };
   const handleManageProduct = () => {
     setUploadProduct(false);
     setManageProduct(true);
     setBlogPosts(false);
     setManageUser(false);
-    setAllBlog(false)
-      setReviews(false)
+    setAllBlog(false);
+    setReviews(false);
   };
   const handleMangeUser = () => {
     setUploadProduct(false);
     setManageProduct(false);
     setBlogPosts(false);
     setManageUser(true);
-        setAllBlog(false)
-        setReviews(false)
+    setAllBlog(false);
+    setReviews(false);
   };
   const handleBlogPost = () => {
     setUploadProduct(false);
     setManageProduct(false);
     setBlogPosts(true);
     setManageUser(false);
-    setAllBlog(false)
-    setReviews(false)
+    setAllBlog(false);
+    setReviews(false);
   };
   const handleAllBlog = () => {
     setUploadProduct(false);
     setBlogPosts(false);
     setManageProduct(false);
     setManageUser(false);
-    setAllBlog(true)
-    setReviews(false)
+    setAllBlog(true);
+    setReviews(false);
   };
   const handleAllReviews = () => {
     setUploadProduct(false);
     setBlogPosts(false);
     setManageProduct(false);
     setManageUser(false);
-    setAllBlog(false)
-    setReviews(true)
+    setAllBlog(false);
+    setReviews(true);
   };
 
   return (
@@ -136,9 +136,9 @@ const Dashboard = () => {
             Manage Service
             <FcManager className={`mx-4 h-6 w-6 text-secondary`}></FcManager>
           </p>
-        
+
           <p
-        onClick={handleBlogPost}
+            onClick={handleBlogPost}
             className={`${
               blogPosts &&
               "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
@@ -152,7 +152,7 @@ const Dashboard = () => {
             ></BsNewspaper>
           </p>
           <p
-        onClick={handleAllReviews}
+            onClick={handleAllReviews}
             className={`${
               reviews &&
               "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
@@ -173,7 +173,7 @@ const Dashboard = () => {
           {manageProduct && <ManageProducts> </ManageProducts>}
           {manageUser && <ManageUsers> </ManageUsers>}
           {allBlog && <AllBlogs></AllBlogs>}
-          {reviews && <ManageReviews/>}
+          {reviews && <ManageReviews />}
         </main>
       </div>
     </div>

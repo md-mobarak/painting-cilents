@@ -25,7 +25,9 @@ const ManageReviews = () => {
   const [size, setSize] = useState(7);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/review?page=${page}&size=${size}`)
+    fetch(
+      `https://painting-server-9.vercel.app/api/v1/review?page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);
@@ -39,7 +41,6 @@ const ManageReviews = () => {
     return <h1>loading...</h1>;
   }
 
-
   const handleReviewDelete = (Id) => {
     const token = localStorage.getItem("accessToken");
     const headers = {
@@ -48,7 +49,7 @@ const ManageReviews = () => {
     };
 
     try {
-      fetch(`http://localhost:5000/api/v1/review/${Id}`, {
+      fetch(`https://painting-server-9.vercel.app/api/v1/review/${Id}`, {
         method: "DELETE",
         headers: headers,
       })

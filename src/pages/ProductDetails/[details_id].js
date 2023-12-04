@@ -40,7 +40,7 @@ const ProductDetails = ({ data }) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     };
-    fetch("http://localhost:5000/api/v1/profile", {
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
       method: "GET",
       headers: headers,
     })
@@ -51,15 +51,19 @@ const ProductDetails = ({ data }) => {
   }, [userId]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/review/${data?.data?.id}`, {
-      method: "GET",
-    })
+    fetch(
+      `https://painting-server-9.vercel.app/api/v1/review/${data?.data?.id}`,
+      {
+        method: "GET",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setComments(data);
-      }).catch((err)=>{
-        console.log(err)
       })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleCartPost = () => {
@@ -74,7 +78,9 @@ const ProductDetails = ({ data }) => {
       userId,
     };
     axios
-      .post("http://localhost:5000/api/v1/cart", cartData, { headers })
+      .post("https://painting-server-9.vercel.app/api/v1/cart", cartData, {
+        headers,
+      })
       .then((res) => {
         toast.success(res.data.message);
         console.log(res);
@@ -102,7 +108,7 @@ const ProductDetails = ({ data }) => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/review/",
+        "https://painting-server-9.vercel.app/api/v1/review/",
         commentData,
         { headers }
       );
@@ -225,7 +231,9 @@ export async function getServerSideProps(context) {
   try {
     const { params } = context;
     const id = params?.details_id;
-    const res = await fetch(`http://localhost:5000/api/v1/painting/${id}`);
+    const res = await fetch(
+      `https://painting-server-9.vercel.app/api/v1/painting/${id}`
+    );
 
     if (!res.ok) {
       throw new Error("Failed to fetch data");

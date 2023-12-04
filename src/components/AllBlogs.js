@@ -16,10 +16,13 @@ const AllBlogs = () => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     };
-    fetch(`http://localhost:5000/api/v1/blogs?page=${page}&size=${size}`, {
-      method: "GET",
-      headers: headers,
-    })
+    fetch(
+      `https://painting-server-9.vercel.app/api/v1/blogs?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setBlogs(data);
@@ -50,7 +53,7 @@ const AllBlogs = () => {
     };
 
     try {
-      fetch(`http://localhost:5000/api/v1/blogs/${id}`, {
+      fetch(`https://painting-server-9.vercel.app/api/v1/blogs/${id}`, {
         method: "DELETE",
         headers: headers,
       })
@@ -93,7 +96,7 @@ const AllBlogs = () => {
   //     "Content-Type": "application/json",
   //     authorization: `Bearer ${token}`,
   //   };
-  //   fetch(`http://localhost:5000/api/v1/blogs/${id}`, {
+  //   fetch(`https://painting-server-9.vercel.app/api/v1/blogs/${id}`, {
   //     method: "DELETE",
   //     headers: headers,
   //   })

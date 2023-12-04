@@ -15,7 +15,7 @@ const profile = () => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    fetch("http://localhost:5000/api/v1/profile", {
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
       method: "GET",
       headers: headers,
     })
@@ -61,7 +61,7 @@ const profile = () => {
         };
 
         const updateResponse = await fetch(
-          `http://localhost:5000/api/v1/users/${userProfile?.data?.id}`,
+          `https://painting-server-9.vercel.app/api/v1/users/${userProfile?.data?.id}`,
           {
             method: "PATCH",
             headers: headers,
@@ -97,12 +97,15 @@ const profile = () => {
   return (
     <div
       className={`min-h-screen ${
-        !editProfile && "flex justify-center items-center"
+        !editProfile && "flex justify-center items-center lg:p-0 p-2"
       } bg-gradient-to-r from-neutral via-indigo-500 to-primary `}
     >
       {!editProfile && (
         <div
-          className={`border text-white border-white p-4 rounded-xl my-10 shadow-2xl`}
+        data-aos="fade-up"
+        data-aos-duration="2000"
+        data-aos-anchor-placement="top-bottom"
+          className={`border text-white border-white  p-4   rounded-xl my-10 shadow-2xl`}
         >
           <div className="text-center mb-3">
             <h1 className="text-2xl font-bold uppercase">
@@ -149,7 +152,12 @@ const profile = () => {
         </div>
       )}
       {editProfile && (
-        <div className="  p-20">
+        <div
+        
+        data-aos="fade-up"
+        data-aos-duration="2000"
+        data-aos-anchor-placement="top-bottom"
+          className="  lg:p-20 p-8">
           <form
             className={`border border-white p-10 rounded-xl shadow-2xl`}
             onSubmit={handleSubmit(onSubmit)}

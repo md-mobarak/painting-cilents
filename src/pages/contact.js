@@ -6,6 +6,9 @@ const contact = () => {
   return (
     <div className="font-serif">
       <div
+        data-aos="fade-right"
+        data-aos-duration="2000"
+        data-aos-anchor-placement="top-bottom"
         className="relative h-64 md:h-96 bg-cover bg-center"
         style={{
           backgroundImage:
@@ -25,7 +28,12 @@ const contact = () => {
           </div>
         </div>
       </div>
-      <div className=" lg:grid grid-cols-2 p-10 my-20 space-x-10 ">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="3000"
+        data-aos-anchor-placement="top-bottom"
+        className=" lg:grid grid-cols-2 p-10 my-20 space-x-10 "
+      >
         <section className="mt-16">
           <div className="bg-base-200 p-4 rounded-lg shadow-md flex items-center justify-between h-32 w-full">
             <div className="flex items-center">

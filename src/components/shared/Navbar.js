@@ -16,14 +16,15 @@ const Navbar = () => {
   const router = useRouter();
   const [user, setUser] = useState({});
   const [toggleUser, setToggleUser] = useState(false);
-  // console.log(user);
+  const adminAndSuperAdmin = user?.data?.role;
+  // console.log(adminAndSuperAdmin);
   useEffect(() => {
     // Your API request logic using 'token'
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    fetch("http://localhost:5000/api/v1/profile", {
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
       method: "GET",
       headers: headers,
     })
@@ -50,7 +51,7 @@ const Navbar = () => {
     router.push("/login");
     setToggleUser(false);
   };
-
+  // console.log(user);
   return (
     <nav>
       <div className="flex  justify-between font-serif items-center lg:p-x-8 lg:p-4 uppercase cursor-pointer lg:font-bold text-secondary ">
@@ -65,50 +66,50 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block">
           <ul className="flex items-center justify-around space-x-8">
-          <Link href="/">
-            <li
-              className={`hover:text-primary ${
-                pathname === "/" && "text-primary"
-              }`}
-            >
-              Home
+            <Link href="/">
+              <li
+                className={`hover:text-primary ${
+                  pathname === "/" && "text-primary"
+                }`}
+              >
+                Home
               </li>
-              </Link>
-              <Link href="/services">
-            <li
-              className={`hover:text-primary ${
-                pathname === "/services" && "text-primary"
-              }`}
-            >
-              Service
-            </li>
+            </Link>
+            <Link href="/services">
+              <li
+                className={`hover:text-primary ${
+                  pathname === "/services" && "text-primary"
+                }`}
+              >
+                Service
+              </li>
             </Link>
             <Link href="/about">
-            <li
-              className={`hover:text-primary ${
-                pathname === "/about" && "text-primary"
-              }`}
-            >
-              About us
-            </li>
+              <li
+                className={`hover:text-primary ${
+                  pathname === "/about" && "text-primary"
+                }`}
+              >
+                About us
+              </li>
             </Link>
             <Link href="/contact">
-            <li
-              className={`hover:text-primary ${
-                pathname === "/contact" && "text-primary"
-              }`}
-            >
-              Contact us
-            </li>
+              <li
+                className={`hover:text-primary ${
+                  pathname === "/contact" && "text-primary"
+                }`}
+              >
+                Contact us
+              </li>
             </Link>
             <Link href="/blogs">
-            <li
-              className={`hover:text-primary ${
-                pathname === "/blogs" && "text-primary"
-              }`}
-            >
-              Blog
-            </li>
+              <li
+                className={`hover:text-primary ${
+                  pathname === "/blogs" && "text-primary"
+                }`}
+              >
+                Blog
+              </li>
             </Link>
           </ul>
         </div>
@@ -142,14 +143,22 @@ const Navbar = () => {
       </div>
       {toggleUser && (
         <div className="z-40 absolute right-5  ">
-          <div className=" rounded-lg w-40 cursor-pointer  text-center  p-3 shadow-lg text-white bg-gradient-to-tr from-blue-600 to-purple-600 hover:from-blue-600 hover:to-purple-600 ">
+          <div className=" rounded-lg w-40 cursor-pointer  text-center  p-3 shadow-lg text-white bg-secondary  ">
             <ul>
-              <li className="hover:text-secondary">
-                <Link href="/Dashboard/dashboard">Dashboard</Link>
-              </li>
-              <li className="hover:text-secondary">   <Link href="/profile">My profile</Link></li>
+              {adminAndSuperAdmin === "user" ? (
+                ""
+              ) : (
+                <li className="hover:text-parimary">
+                  <Link href="/Dashboard/dashboard">Dashboard</Link>
+                </li>
+              )}
+              {user?.data && (
+                <li className="hover:text-parimary">
+                  <Link href="/profile">My profile</Link>
+                </li>
+              )}
 
-              <li className="hover:text-secondary">
+              <li className="hover:text-parimary">
                 <Link onClick={() => logOut()} href="/login">
                   Log Out
                 </Link>
@@ -197,11 +206,68 @@ const Navbar = () => {
                 />
               )}
             </div>
-            <p className=" text-center ">Home</p>
-            <p className=" text-center">Service</p>
-            <p className=" text-center">About us</p>
-            <p className=" text-center">Contact us</p>
-            <p className=" text-center">Blog</p>
+            <p className=" text-center ">
+              <Link
+                href="/"
+                className={`hover:text-primary ${
+                  pathname === "/" && "text-primary"
+                }`}
+              >
+                Home
+              </Link>
+            </p>
+            <p className=" text-center">
+              <Link
+                href="/services"
+                className={`hover:text-primary ${
+                  pathname === "/services" && "text-primary"
+                }`}
+              >
+                Services
+              </Link>
+            </p>
+            <p className=" text-center">
+              <Link
+                href="/about"
+                className={`hover:text-primary ${
+                  pathname === "/about" && "text-primary"
+                }`}
+              >
+                About us
+              </Link>
+            </p>
+            <p className=" text-center">
+              <Link
+                href="/contact"
+                className={`hover:text-primary ${
+                  pathname === "/contact" && "text-primary"
+                }`}
+              >
+                Contact us
+              </Link>
+            </p>
+            <p className=" text-center">
+              <Link
+                href="/blogs"
+                className={`hover:text-primary ${
+                  pathname === "/blogs" && "text-primary"
+                }`}
+              >
+                Blogs
+              </Link>
+            </p>
+            {
+              <p className=" text-center">
+                <Link
+                  href="/profile"
+                  className={`hover:text-primary ${
+                    pathname === "/profile" && "text-primary"
+                  }`}
+                >
+                  My Profile
+                </Link>
+              </p>
+            }
 
             <p className="text-center">
               {token ? (

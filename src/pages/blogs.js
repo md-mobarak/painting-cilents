@@ -17,7 +17,7 @@ const blogs = () => {
     //     "Content-Type": "application/json",
     //     authorization: `Bearer ${token}`,
     //   };
-    fetch(`http://localhost:5000/api/v1/blogs/user`, {
+    fetch(`https://painting-server-9.vercel.app/api/v1/blogs/user`, {
       method: "GET",
       // headers: headers,
     })
@@ -33,6 +33,9 @@ const blogs = () => {
   return (
     <div className="font-serif">
       <div
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        data-aos-anchor-placement="top-bottom"
         className="relative h-64 md:h-96 bg-cover bg-center"
         style={{
           backgroundImage:
@@ -55,10 +58,15 @@ const blogs = () => {
       <h1 className="text-center text-4xl font-bold text-secondary mt-10">
         RECENT BLOGS
       </h1>
-      <div className="lg:grid grid-cols-3 p-20 gap-8">
+      <div className="lg:grid grid-cols-3 lg:my-0 my-4 p-20 gap-8">
         {blogs?.data?.map((b) => {
           return (
-            <div className="max-w-md mx-auto bg-white p-4 rounded-lg shadow-md">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="2000"
+              data-aos-anchor-placement="top-bottom"
+              className="max-w-md mx-auto bg-white p-4 rounded-lg shadow-md"
+            >
               <img
                 className="w-full h-40 object-cover object-center mb-4 rounded-md"
                 src={b.img_url}

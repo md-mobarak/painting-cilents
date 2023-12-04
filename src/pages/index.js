@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Home from "@/components/Home";
 import "react-toastify/dist/ReactToastify.css";
+// import "/node_modules/placeholder-loading/src/scss/placeholder-loading";
 // minified version is also included
+
 // import 'react-toastify/dist/ReactToastify.min.css';
 import ScrollToTop from "react-scroll-to-top";
 // ..
@@ -15,7 +17,6 @@ export default function index({ data }) {
       <main>
         <Home data={data}></Home>
         <ScrollToTop smooth color="#3F3B75" />
-  
       </main>
     );
   }
@@ -24,7 +25,9 @@ export default function index({ data }) {
 export async function getServerSideProps() {
   try {
     // Fetch data from an API or any other data source
-    const res = await fetch("http://localhost:5000/api/v1/painting/service");
+    const res = await fetch(
+      "https://painting-server-9.vercel.app/api/v1/painting/service"
+    );
     if (!res?.ok) {
       throw new Error("Failed to fetch data");
     }

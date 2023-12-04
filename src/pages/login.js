@@ -39,7 +39,10 @@ const Login = () => {
       // Form is valid, you can submit the data or make an API request here
       // console.log("Form data is valid:", formData);
       axios
-        .post("http://localhost:5000/api/v1/auth/signin", formData)
+        .post(
+          "https://painting-server-9.vercel.app/api/v1/auth/signin",
+          formData
+        )
         .then((res) => {
           const token = res.data.data.accessToken;
           localStorage.setItem("accessToken", token);
@@ -58,7 +61,12 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center py-10 justify-center bg-gradient-to-tr from-blue-500 to-purple-500 hover:from-blue-500 hover:to-purple-500">
+    <div
+      data-aos="fade-up"
+      data-aos-duration="2000"
+      data-aos-anchor-placement="top-bottom"
+      className="min-h-screen flex items-center py-10 justify-center bg-gradient-to-tr from-blue-500 to-purple-500 hover:from-blue-500 hover:to-purple-500"
+    >
       <div className="w-full max-w-md p-6 space-y-6 bg-white rounded-lg shadow-lg">
         <div className="flex items-center justify-center">
           <div className="w-16 h-16 bg-gradient-to-tr from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">

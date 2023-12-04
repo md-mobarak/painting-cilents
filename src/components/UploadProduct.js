@@ -19,15 +19,12 @@ const UploadProduct = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/v1/painting/create-painting",
+        "https://painting-server-9.vercel.app/api/v1/painting/create-painting",
         newData
       );
       console.log("Service uploaded:", response.data);
       if (response.data) {
-        toast.success("Successfully done Service Post", {
-          position: toast.POSITION.TOP_CENTER,
-          transition: swirl,
-        });
+        toast.success("Successfully done Service Post");
       }
 
       // Add any further actions here, like redirecting to a success page

@@ -1,12 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState(null);
+  const [profile, setProfile] = useState({});
   const [page, setPage] = useState(1);
+  const router = useRouter();
   const [size, setSize] = useState(7);
 
   useEffect(() => {
@@ -16,10 +22,13 @@ const ManageUsers = () => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     };
-    fetch(`http://localhost:5000/api/v1/users?page=${page}&size=${size}`, {
-      method: "GET",
-      headers: headers,
-    })
+    fetch(
+      `https://painting-server-9.vercel.app/api/v1/users?page=${page}&size=${size}`,
+      {
+        method: "GET",
+        headers: headers,
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -28,9 +37,34 @@ const ManageUsers = () => {
         console.log(err);
       });
   }, [page, size, users]); // Re-fetch data when page or size changes
-  if (!users) {
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    // Fetch user data from the backend API with pagination parameters
+    // Your API request logic using 'token'
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
+      method: "GET",
+      headers: headers,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setProfile(data);
+      })
+      .catch((err) => {
+        router.push("/login");
+        // Handle errors gracefully, e.g., display an error message
+        console.log(err);
+      });
+  }, [profile]);
+
+  if (!users || !profile) {
     return <h1>loading...</h1>;
   }
+
   // Handle pagination navigation
   const handlePreviousPage = () => {
     if (page > 1) {
@@ -45,14 +79,25 @@ const ManageUsers = () => {
   };
 
   const handleDeleteUser = (userId) => {
+    const token = localStorage.getItem("accessToken");
+    // Fetch user data from the backend API with pagination parameters
+    const headers = {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    };
     // Implement the logic to delete a user by making a DELETE request to your API
-    fetch(`http://localhost:5000/api/users/${userId}`, {
+    fetch(`https://painting-server-9.vercel.app/api/v1/users/${userId}`, {
       method: "DELETE",
+      headers: headers,
     })
       .then((res) => res.json())
       .then((data) => {
         // Handle success or error based on the response from the API
         console.log(data);
+        if (res.data) {
+          // toast.success("Successfully deleted User");
+          toast.success("user deleted successfully");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -66,7 +111,7 @@ const ManageUsers = () => {
       authorization: `Bearer ${token}`,
     };
     // Implement the logic to make a user admin by making a PATCH request to your API
-    fetch(`http://localhost:5000/api/v1/users/role/${userId}`, {
+    fetch(`https://painting-server-9.vercel.app/api/v1/users/role/${userId}`, {
       method: "PATCH",
       headers: headers,
       body: JSON.stringify({ role: "admin" }), // Replace with your API's expected request body
@@ -80,8 +125,10 @@ const ManageUsers = () => {
         console.log(err);
       });
   };
-
-  // console.log(users);
+  const newUserObj = {
+    users,
+    profile,
+  };
 
   return (
     <div>
@@ -103,8 +150,9 @@ const ManageUsers = () => {
           </thead>
           {/* Table Body */}
           <tbody>
-            {users?.user?.map((user, index) => {
-              //  console.log(user)
+            {newUserObj?.users?.user?.map((user, index) => {
+              // console.log(user);
+              const isUserEmail = newUserObj?.profile?.data?.email;
               return (
                 <tr key={user.id} className="bg-base-200">
                   <td>{index + 1}</td>
@@ -118,23 +166,36 @@ const ManageUsers = () => {
                     />
                   </td>
                   <td>
-                    <p
-                      onClick={() => handleDeleteUser(user.id)}
-                      className="flex cursor-pointer justify-center items-center"
-                    >
-                      <RiDeleteBin6Line className="text-red-500 h-6 w-6"></RiDeleteBin6Line>
-                    </p>
+                    {isUserEmail === user.email ? (
+                      ""
+                    ) : (
+                      <p
+                        onClick={() => handleDeleteUser(user.id)}
+                        className="flex cursor-pointer justify-center items-center"
+                      >
+                        <RiDeleteBin6Line className="text-red-500 h-6 w-6"></RiDeleteBin6Line>
+                      </p>
+                    )}
                   </td>
-                  <td>
-                    {users?.meta?.role === "super-admin" && (
-                      <button
+                  {users?.meta?.role === "super-admin" && (
+                    <td>
+                      {
+                        user.role === 'user'?<button
+                      
+                        onClick={() => handleMakeAdmin(user.id)}
+                        className="btn btn-neutral btn-xs text-white"
+                      >
+                        Make Admin
+                      </button>: <button
+                         disabled
                         onClick={() => handleMakeAdmin(user.id)}
                         className="btn btn-neutral btn-xs text-white"
                       >
                         Make Admin
                       </button>
-                    )}
-                  </td>
+                   }   
+                    </td>
+                  )}
                   <td className=" text-neutral font-semibold">{user?.role}</td>
                 </tr>
               );
