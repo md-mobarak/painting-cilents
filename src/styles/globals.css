@@ -3,6 +3,47 @@
 @tailwind utilities;
 
 /* styles/tailwind.css */
+.spinner {
+  width: 67.2px;
+  height: 33.6px;
+  display: grid;
+  background: radial-gradient(
+        farthest-side at bottom,
+        #0000 calc(100% - 5.6px),
+        #046c70 calc(100% - 4.5px) 96%,
+        #0000
+      )
+      0 0,
+    radial-gradient(
+        farthest-side at top,
+        #0000 calc(100% - 5.6px),
+        #280470 calc(100% - 4.5px) 96%,
+        #0000
+      )
+      100% 100%;
+  background-size: calc(50% + 2.2px) 50%;
+  background-repeat: no-repeat;
+  animation: spinner-avjjp3 1.5s infinite linear;
+}
+
+.spinner:before,
+.spinner:after {
+  content: "";
+  grid-area: 1/1;
+  background: inherit;
+  animation: inherit;
+  animation-duration: 2s;
+}
+
+.spinner:after {
+  --s: -1;
+}
+
+@keyframes spinner-avjjp3 {
+  100% {
+    transform: rotate(calc(var(--s, 1) * 1turn));
+  }
+}
 
 .pagination {
   display: flex;

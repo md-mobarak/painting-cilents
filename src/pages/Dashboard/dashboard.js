@@ -4,6 +4,7 @@
 import AllBlogs from "@/components/AllBlogs";
 import ManageProducts from "@/components/ManageProducts";
 import ManageReviews from "@/components/ManageReviews";
+import { useEffect} from "react"
 import ManageUsers from "@/components/ManageUsers";
 import OurBlogPost from "@/components/OurBlogPost";
 import UploadProduct from "@/components/UploadProduct";
@@ -22,6 +23,29 @@ const Dashboard = () => {
   const [reviews, setReviews] = useState(false);
   const [manageUser, setManageUser] = useState(true);
   const [toggleNav, setToggleNav] = useState(false);
+  const [user, setUser] = useState({});
+
+  // console.log(adminAndSuperAdmin);
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    // Your API request logic using 'token'
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+    fetch("https://painting-server-9.vercel.app/api/v1/profile", {
+      method: "GET",
+      headers: headers,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        // Handle errors gracefully, e.g., display an error message
+        // console.log(err);
+      });
+  }, [ user]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);

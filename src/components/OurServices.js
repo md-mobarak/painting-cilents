@@ -68,46 +68,52 @@ const OurServices = (data) => {
           <AiFillFormatPainter className="h-14 w-14 text-secondary "></AiFillFormatPainter>
         </div>
       </section>
-      <section className="lg:grid  grid-cols-3 gap-5 font-serif">
-        {data?.data?.data?.data?.map((p) => {
-          return (
-            <div
-              data-aos="fade-up"
-              data-aos-duration="2000"
-              data-aos-anchor-placement="top-bottom"
-              className="card card-compact w-96 text-black  bg-base-100 shadow-xl"
-            >
-              <figure>
-                <img
-                  className="h-[256px] w-[384px]"
-                  src={p.images}
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p className="text-xl">
-                  If a dog chews shoes whose shoes does he choose?
-                </p>
-                <div className="card-actions justify-between">
-                  <button
-                    onClick={() => handleCartPost(p.id)}
-                    className="btn btn-secondary btn-xs text-white"
-                  >
-                    Add To Cart
-                  </button>
-                  <button
-                    onClick={() => handleNavigate(p.id)}
-                    className="btn btn-secondary  btn-xs text-white"
-                  >
-                    Details
-                  </button>
+      <section className="lg:block flex justify-center items-center">
+        <section className="lg:grid  grid-cols-3 gap-5 font-serif">
+          {data?.data?.data?.data?.slice(0, 6)?.map((p) => {
+            return (
+              <div
+                data-aos="fade-up"
+                data-aos-duration="2000"
+                data-aos-anchor-placement="top-bottom"
+                className="card card-compact w-96 text-black my-5 lg:my-0 bg-base-100 shadow-xl"
+              >
+                <figure>
+                  <img
+                    className="h-[256px] w-[384px]"
+                    src={p.images}
+                    alt="Shoes"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">Shoes!</h2>
+                  <p className="text-xl">
+                    If a dog chews shoes whose shoes does he choose?
+                  </p>
+                  <div className="card-actions justify-between">
+                    <button
+                      onClick={() => handleCartPost(p.id)}
+                      className="btn btn-secondary btn-xs text-white"
+                    >
+                      Add To Cart
+                    </button>
+                    <button
+                      onClick={() => handleNavigate(p.id)}
+                      className="btn btn-secondary  btn-xs text-white"
+                    >
+                      Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+         
+        </section>
       </section>
+      <div className='flex justify-end'>
+            <button className="btn btn-xs btn-primary">See More</button>
+          </div>
     </div>
   );
 };

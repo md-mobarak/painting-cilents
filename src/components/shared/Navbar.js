@@ -34,7 +34,7 @@ const Navbar = () => {
       })
       .catch((err) => {
         // Handle errors gracefully, e.g., display an error message
-        console.log(err);
+        // console.log(err);
       });
   }, [token, user]);
 

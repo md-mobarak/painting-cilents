@@ -34,14 +34,14 @@ const Services = () => {
   }, [page, size, searchTerm, selectedCategory, minPrice, maxPrice]);
 
   const handlePreviousPage = () => {
-    console.log(page);
+    // console.log(page);
     if (page > 1) {
       setPage(page - 1);
     }
   };
 
   const handleNextPage = () => {
-    console.log(page);
+    // console.log(page);
     // Assuming totalPage is provided in the API response
     if (page < services2?.meta?.totalPage) {
       setPage(page + 1);
@@ -53,7 +53,7 @@ const Services = () => {
     // console.log(id);
     router.push(`/ProductDetails/${id}`);
   };
-
+  console.log(services);
   return (
     <div className="flex flex-col md:flex-row px-10">
       {/* Sidebar - Filters */}
@@ -139,33 +139,45 @@ const Services = () => {
           data-aos="fade-up"
           data-aos-duration="2000"
           data-aos-anchor-placement="top-bottom"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className={`${
+            services?.length &&
+            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          } `}
         >
           {/* Display services for the current page */}
-          {services?.map((service) => (
-            <div key={service.id} className="bg-white p-4 rounded-lg shadow-md">
-              <img
-                className="w-full h-40 object-cover object-center mb-4 rounded-md"
-                src={service.images}
-                alt={`Service Image for ${service.images}`}
-              />
-              <h2 className="text-xl font-bold text-gray-800 mb-2">
-                {service.title}
-              </h2>
-              <p className="text-gray-600 mb-2">
-                {service?.description?.slice(0, 70)}...
-              </p>
-              <p className="text-gray-400 text-sm mb-2">
-                Price:$ {service.price}
-              </p>
-              <button
-                onClick={() => handleNavigate(service.id)}
-                className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
-              >
-                Details
-              </button>
+          {!services?.length ? (
+            <div className="flex justify-center my-20 items-center">
+              <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
             </div>
-          ))}
+          ) : (
+            services?.map((service) => (
+              <div
+                key={service.id}
+                className="bg-white p-4 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105"
+              >
+                <img
+                  className="w-full h-40 object-cover object-center mb-4 rounded-md"
+                  src={service.images}
+                  alt={`Service Image for ${service.images}`}
+                />
+                <h2 className="text-xl font-bold text-gray-800 mb-2">
+                  {service.title}
+                </h2>
+                <p className="text-gray-600 mb-2">
+                  {service?.description?.slice(0, 70)}...
+                </p>
+                <p className="text-gray-400 text-sm mb-2">
+                  Price:$ {service.price}
+                </p>
+                <button
+                  onClick={() => handleNavigate(service.id)}
+                  className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700"
+                >
+                  Details
+                </button>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Pagination */}

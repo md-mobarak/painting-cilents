@@ -122,9 +122,9 @@ const signup = () => {
       data-aos="fade-up"
       data-aos-duration="2000"
       data-aos-anchor-placement="top-bottom"
-      className="min-h-screen flex items-center py-10 justify-center bg-gradient-to-tr from-blue-500 to-purple-500 hover:from-blue-500 hover:to-purple-500"
+      className="min-h-screen flex items-center p-6 lg:p-16 justify-center bg- from-blue-500 to-purple-500 hover:from-blue-500 hover:to-purple-500"
     >
-      <div className="w-full max-w-md p-6 space-y-6 bg-white rounded-lg shadow-lg">
+      <div className="w-full px-6 lg:px-16 py-6 space-y-6 border border-purple-500 bg-white rounded-lg shadow-xl">
         <div className="flex items-center justify-center">
           <div className="w-16 h-16 bg-gradient-to-tr from-blue-400 to-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold">
             U
