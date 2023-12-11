@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AiFillFormatPainter } from "react-icons/ai";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const OurServices = (data) => {
@@ -12,6 +13,10 @@ const OurServices = (data) => {
   const handleNavigate = (id) => {
     // console.log(id);
     router.push(`/ProductDetails/${id}`);
+  };
+  const handleNavigateService = (id) => {
+    // console.log(id);
+    router.push(`/services`);
   };
   const handleCartPost = (id) => {
     const serviceId = id;
@@ -108,12 +113,14 @@ const OurServices = (data) => {
               </div>
             );
           })}
-         
         </section>
       </section>
-      <div className='flex justify-end'>
-            <button className="btn btn-xs btn-primary">See More</button>
-          </div>
+      <div className="flex justify-end my-4 lg:my-8 ">
+        <button onClick={handleNavigateService} className=" text-secondary lg:mx-9 flex items-center">
+          See More
+          <FaArrowAltCircleRight className="mx-2 w-6 lg:w-8 h-6 lg:h-8"></FaArrowAltCircleRight>
+        </button>
+      </div>
     </div>
   );
 };

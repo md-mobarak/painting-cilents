@@ -137,7 +137,7 @@ const Services = () => {
         {/* Service Cards */}
         <div
           data-aos="fade-up"
-          data-aos-duration="2000"
+          // data-aos-duration="2000"
           data-aos-anchor-placement="top-bottom"
           className={`${
             services?.length &&
