@@ -38,7 +38,11 @@ const ManageReviews = () => {
   }, [reviews]);
 
   if (!reviews) {
-    return <h1>loading...</h1>;
+    return (
+      <div className="flex justify-center my-20 items-center">
+        <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+      </div>
+    );
   }
 
   const handleReviewDelete = (Id) => {

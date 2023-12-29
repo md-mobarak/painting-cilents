@@ -1,12 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Home from "@/components/Home";
-import "react-toastify/dist/ReactToastify.css";
-// import "/node_modules/placeholder-loading/src/scss/placeholder-loading";
-// minified version is also included
-
-// import 'react-toastify/dist/ReactToastify.min.css';
 import ScrollToTop from "react-scroll-to-top";
-// ..
+import "react-toastify/dist/ReactToastify.css";
 
 export default function index({ data }) {
   // console.log(data.data);

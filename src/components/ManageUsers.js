@@ -62,7 +62,11 @@ const ManageUsers = () => {
   }, [profile]);
 
   if (!users || !profile) {
-    return <h1>loading...</h1>;
+    return (
+      <div className="flex justify-center my-20 items-center">
+        <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+      </div>
+    );
   }
 
   // Handle pagination navigation
@@ -179,21 +183,22 @@ const ManageUsers = () => {
                   </td>
                   {users?.meta?.role === "super-admin" && (
                     <td>
-                      {
-                        user.role === 'user'?<button
-                      
-                        onClick={() => handleMakeAdmin(user.id)}
-                        className="btn btn-neutral btn-xs text-white"
-                      >
-                        Make Admin
-                      </button>: <button
-                         disabled
-                        onClick={() => handleMakeAdmin(user.id)}
-                        className="btn btn-neutral btn-xs text-white"
-                      >
-                        Make Admin
-                      </button>
-                   }   
+                      {user.role === "user" ? (
+                        <button
+                          onClick={() => handleMakeAdmin(user.id)}
+                          className="btn btn-neutral btn-xs text-white"
+                        >
+                          Make Admin
+                        </button>
+                      ) : (
+                        <button
+                          disabled
+                          onClick={() => handleMakeAdmin(user.id)}
+                          className="btn btn-neutral btn-xs text-white"
+                        >
+                          Make Admin
+                        </button>
+                      )}
                     </td>
                   )}
                   <td className=" text-neutral font-semibold">{user?.role}</td>

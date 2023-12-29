@@ -136,9 +136,10 @@ const Services = () => {
 
         {/* Service Cards */}
         <div
-          data-aos="fade-up"
+          // data-aos="fade-up"
+          // data-aos-anchor-placement="top-bottom"
           // data-aos-duration="2000"
-          data-aos-anchor-placement="top-bottom"
+          // data-aos-anchor-placement="top-top"
           className={`${
             services?.length &&
             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"

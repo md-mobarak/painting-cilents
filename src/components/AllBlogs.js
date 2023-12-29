@@ -114,6 +114,13 @@ const AllBlogs = () => {
   //       console.log(err);
   //     });
   // };
+  if (!blogs) {
+    return (
+      <div className="flex justify-center my-20 items-center">
+        <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-10">

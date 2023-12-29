@@ -25,26 +25,13 @@ const ManageProducts = () => {
         console.log(err);
       });
   }, [serviceData, page, size]);
-  // const handleDelete = (id) => {
-  //   window.alert("Are you suer?");
-  //   fetch(`https://painting-server-9.vercel.app/api/v1/painting/${id}`, {
-  //     method: "DELETE",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data.success === true) {
-  //         toast.success("Successfully Deleted Service", {
-  //           position: toast.POSITION.TOP_CENTER,
-  //           transition: swirl,
-  //         });
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
+  // if (!serviceData) {
+  //   return (
+  //     <div className="flex justify-center my-20 items-center">
+  //       <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+  //     </div>
+  //   );
+  // }
   const handleDelete = (Id) => {
     const token = localStorage.getItem("accessToken");
     const headers = {
@@ -89,14 +76,14 @@ const ManageProducts = () => {
     }
   };
   const handlePreviousPage = () => {
-    console.log(page);
+    // console.log(page);
     if (page > 1) {
       setPage(page - 1);
     }
   };
 
   const handleNextPage = () => {
-    console.log(page);
+    // console.log(page);
     // Assuming totalPage is provided in the API response
     if (page < serviceData?.meta?.totalPage) {
       setPage(page + 1);
@@ -143,6 +130,14 @@ const ManageProducts = () => {
     setServiceId(id);
     setEditService(true);
   };
+  if (!serviceData) {
+    return (
+      <div className="flex justify-center my-20 items-center">
+        <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="">
       {!editService && (
@@ -161,7 +156,6 @@ const ManageProducts = () => {
                   data-aos-anchor-placement="top-bottom"
                   className="card  border border-neutral card-compact w-64 text-black  bg-base-100 shadow-xl"
                 >
-                  
                   <figure>
                     <img
                       className="w-[250px] h-[200px] rounded-xl p-2"
