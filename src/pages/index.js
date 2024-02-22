@@ -4,17 +4,14 @@ import ScrollToTop from "react-scroll-to-top";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function index({ data }) {
-  // console.log(data.data);
-  if (!data?.data?.length) {
-    return <div className="text-4xl text-center text-error">loading...</div>;
-  } else {
+
     return (
       <main>
         <Home data={data}></Home>
         <ScrollToTop smooth color="#3F3B75" />
       </main>
     );
-  }
+
 }
 
 export async function getServerSideProps() {

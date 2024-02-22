@@ -108,7 +108,7 @@ const Review = () => {
         <section data-aos="fade-down" data-aos-easing="ease-in-sine">
           <img
             className="w-auto h-auto rounded-xl shadow-xl"
-            src="https://www.paintsplatter.oxacor.com/wp-content/uploads/painting-the-walls-768x512.jpg"
+            src="https://img.freepik.com/free-photo/couple-posing-together-their-new-home-while-holding-paintbrush_23-2149086827.jpg?w=740&t=st=1708577261~exp=1708577861~hmac=f660c19905e6e09025f43107767eb838e361356ad292d280b04478d83825b149"
             alt=""
           />
         </section>

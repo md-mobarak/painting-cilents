@@ -61,7 +61,7 @@ const ExperiencedPainters = () => {
       >
         <img
           className="lg:w-[2000px] lg:h-[600px] w-full h-full  p-3 shadow-xl rounded-xl "
-          src="https://www.paintsplatter.oxacor.com/wp-content/uploads/paint-roller-to-paint-1024x682.jpg"
+          src="https://img.freepik.com/premium-photo/workers-apartment_392895-166658.jpg?w=740"
           alt=""
         />
       </section>

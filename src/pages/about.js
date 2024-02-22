@@ -104,7 +104,7 @@ const about = () => {
         <section className="w-6/12">
           <img
             className="rounded-xl"
-            src="https://www.paintsplatter.oxacor.com/wp-content/uploads/street-art-682x1024.jpg"
+            src="https://largeartcanvas.com/cdn/shop/products/Canvas_painting_Extra_large_wall_art_Big_canvas_art_L652-6_1500x.jpg?v=1572244505"
             alt=""
           />
         </section>
@@ -145,7 +145,7 @@ const about = () => {
           <div className=" bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105">
             <img
               className="w-full h-64 object-cover object-center"
-              src="https://www.paintsplatter.oxacor.com/wp-content/uploads/happy-young-painter-holding-paint-brush-and-showing-it-to-camera-768x1154.jpg"
+              src="https://img.freepik.com/premium-photo/businessman-table_88340-4417.jpg?w=740"
               alt="Person's photo"
             />
             <div className="p-6">
@@ -166,7 +166,7 @@ const about = () => {
           <div className=" bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105">
             <img
               className="w-full h-64 object-cover object-center"
-              src="https://www.paintsplatter.oxacor.com/wp-content/uploads/paint-art-and-face-with-a-woman-painter-in-her-creative-studio-or-artwork-studio-for-design-and-cr-768x1028.jpg"
+              src="https://img.freepik.com/free-photo/positive-teacher-posing-with-open-notebook_114579-77678.jpg?w=740&t=st=1708604181~exp=1708604781~hmac=45f0a9fb12094b6e5de1b21bce320f4314633a289dad242c4f44313fdbab8b5e"
               alt="Person's photo"
             />
             <div className="p-6">
@@ -187,7 +187,7 @@ const about = () => {
           <div className=" bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105">
             <img
               className="w-full h-64 object-cover object-center"
-              src="https://www.paintsplatter.oxacor.com/wp-content/uploads/happy-woman-painting-interior-wall-with-paint-roller-in-new-house-e1678323493469-768x1047.jpg"
+              src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=740&t=st=1708604240~exp=1708604840~hmac=3bcb4d2e4d4908deda1f8569e8c9c7886fd039829fdd4fb4bc60e62bd37ed215"
               alt="Person's photo"
             />
             <div className="p-6">
@@ -208,7 +208,7 @@ const about = () => {
           <div className=" bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105">
             <img
               className="w-full h-64 object-cover object-center"
-              src="https://www.paintsplatter.oxacor.com/wp-content/uploads/happy-and-successful-painter-with-smartphone-and-paintbrush-768x1152.jpg"
+              src="https://img.freepik.com/free-photo/smiley-handsome-man-posing_23-2148911843.jpg?w=740&t=st=1708604287~exp=1708604887~hmac=d33043600c99f3e88e53d8007b2184ea33ea2bf1300b0f781c3b96158c77de01"
               alt="Person's photo"
             />
             <div className="p-6">
@@ -232,7 +232,7 @@ const about = () => {
         <div className="w-10/12">
           <img
             className="rounded-xl"
-            src="https://www.paintsplatter.oxacor.com/wp-content/uploads/happy-woman-painting-interior-wall-with-paint-roller-in-new-house-e1678323493469-751x1024.jpg"
+            src="https://images.meesho.com/images/products/275261037/dpqx0_512.webp"
             alt=""
           />
         </div>

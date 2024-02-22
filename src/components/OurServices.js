@@ -7,6 +7,7 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 const OurServices = (data) => {
+  const serviceData = data?.data?.data?.data
   // console.log(data);
   const router = useRouter();
   const { pathname } = router;
@@ -58,6 +59,7 @@ const OurServices = (data) => {
         }
       });
   };
+  
 
   return (
     <div className="text-center font-serif lg:my-20">
@@ -75,48 +77,58 @@ const OurServices = (data) => {
       </section>
       <section className="lg:block flex justify-center items-center">
         <section className="lg:grid  grid-cols-3 gap-5 font-serif">
-          {data?.data?.data?.data?.slice(0, 6)?.map((p) => {
-            return (
-              <div
-                data-aos="fade-up"
-                data-aos-duration="2000"
-                data-aos-anchor-placement="top-bottom"
-                className="card card-compact w-96 text-black my-5 lg:my-0 bg-base-100 shadow-xl"
-              >
-                <figure>
-                  <img
-                    className="h-[256px] w-[384px]"
-                    src={p.images}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Shoes!</h2>
-                  <p className="text-xl">
-                    If a dog chews shoes whose shoes does he choose?
-                  </p>
-                  <div className="card-actions justify-between">
-                    <button
-                      onClick={() => handleCartPost(p.id)}
-                      className="btn btn-secondary btn-xs text-white"
-                    >
-                      Add To Cart
-                    </button>
-                    <button
-                      onClick={() => handleNavigate(p.id)}
-                      className="btn btn-secondary  btn-xs text-white"
-                    >
-                      Details
-                    </button>
+          {serviceData ?.length === 0 ||
+          !serviceData ?.length ? (
+            <div className="flex justify-center my-20 items-center">
+              <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+            </div>
+          ) : (
+            serviceData ?.slice(0, 6)?.map((p) => {
+              return (
+                <div
+                  data-aos="fade-up"
+                  data-aos-duration="2000"
+                  data-aos-anchor-placement="top-bottom"
+                  className="card card-compact w-96 text-black my-5 lg:my-0 bg-base-100 shadow-xl"
+                >
+                  <figure>
+                    <img
+                      className="h-[256px] w-[384px]"
+                      src={p.images}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">Shoes!</h2>
+                    <p className="text-xl">
+                      If a dog chews shoes whose shoes does he choose?
+                    </p>
+                    <div className="card-actions justify-between">
+                      <button
+                        onClick={() => handleCartPost(p.id)}
+                        className="btn btn-secondary btn-xs text-white"
+                      >
+                        Add To Cart
+                      </button>
+                      <button
+                        onClick={() => handleNavigate(p.id)}
+                        className="btn btn-secondary  btn-xs text-white"
+                      >
+                        Details
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </section>
       </section>
       <div className="flex justify-end my-4 lg:my-8 ">
-        <button onClick={handleNavigateService} className=" text-secondary lg:mx-9 flex items-center">
+        <button
+          onClick={handleNavigateService}
+          className=" text-secondary lg:mx-9 flex items-center"
+        >
           See More
           <FaArrowAltCircleRight className="mx-2 w-6 lg:w-8 h-6 lg:h-8"></FaArrowAltCircleRight>
         </button>

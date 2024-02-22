@@ -12,7 +12,7 @@ const contact = () => {
         className="relative h-64 md:h-96 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('https://www.paintsplatter.oxacor.com/wp-content/uploads/white-sofa-and-grey-accents-1024x682.jpg')",
+            "url('https://st4.depositphotos.com/7656456/26891/i/450/depositphotos_268916802-stock-photo-modern-abstraction-painting-wall-art.jpg')",
         }}
       >
         <div className="absolute inset-0 bg-primary bg-opacity-40 backdrop-filter backdrop-blur-sm">
