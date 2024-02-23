@@ -1,14 +1,52 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import Home from "@/components/Home";
+import { useEffect, useState } from "react";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 import ScrollToTop from "react-scroll-to-top";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function index({ data }) {
+  const [isVisible, setIsVisible] = useState(false);
+  // const { toggleColor, setToggleColor } = useContext(ToggleContext);
+
+  const toggleVisibility = () => {
+    if (window.pageYOffset > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", toggleVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
 
     return (
       <main>
         <Home data={data}></Home>
-        <ScrollToTop smooth color="#3F3B75" />
+        <div
+        className={`fixed bottom-4 z-50 right-8 ${
+          isVisible ? "block" : "hidden"
+        }`}
+      >
+        <button onClick={scrollToTop}>
+          <FaArrowAltCircleUp
+            className={`h-16 w-16 
+            text-secondary  `}
+          />
+        </button>
+      </div>
       </main>
     );
 
