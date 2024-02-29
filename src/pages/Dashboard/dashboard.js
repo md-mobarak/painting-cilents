@@ -4,7 +4,7 @@
 import AllBlogs from "@/components/AllBlogs";
 import ManageProducts from "@/components/ManageProducts";
 import ManageReviews from "@/components/ManageReviews";
-import { useEffect} from "react"
+import { useEffect } from "react";
 import ManageUsers from "@/components/ManageUsers";
 import OurBlogPost from "@/components/OurBlogPost";
 import UploadProduct from "@/components/UploadProduct";
@@ -45,7 +45,7 @@ const Dashboard = () => {
         // Handle errors gracefully, e.g., display an error message
         // console.log(err);
       });
-  }, [ user]);
+  }, [user]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -103,84 +103,92 @@ const Dashboard = () => {
   return (
     <div className="font-serif">
       <h1 className="text-center text-secondary bg-neutral py-3 w-full font-bold text-3xl">
-        Admin
+        Dashboard
       </h1>
       <div className="flex ">
-        <aside className={`w-64 bg-neutral px-1 py-2 h-screen `}>
-          <p
-            onClick={handleMangeUser}
+        <aside className={` bg-neutral px-3 py-2  md:w-1/8 p-4 bg-gray-200`}>
+          <div
             className={`${
-              manageUser &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              manageUser && " bg-secondary     "
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
           >
-            Manage User
-            <PiUsersFour
-              className={`mx-4 h-6 w-6 text-secondary ${
-                manageUser && "text-white"
-              }`}
-            ></PiUsersFour>
-          </p>
-          <p
-            onClick={handleAllBlog}
+            <p onClick={handleMangeUser}>Manage User</p>
+
+            <p>
+              <PiUsersFour
+                className={`mx-2 h-6 w-6 text-secondary ${
+                  manageUser && "text-white"
+                }`}
+              ></PiUsersFour>
+            </p>
+          </div>
+          <div
             className={`${
-              allBlog &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              allBlog && " bg-secondary     "
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
           >
-            Manage Blog
+            <p         onClick={handleAllBlog}>   Manage Blog</p>
+
+            <p>
             <MdOutlineManageAccounts
-              className={`mx-4 h-6 w-6 text-secondary ${
-                allBlog && "text-white"
-              }`}
-            ></MdOutlineManageAccounts>
-          </p>
-
-          <p
-            onClick={handleUploadProduct}
+                className={`mx-2 h-6 w-6 text-secondary ${
+                  allBlog && "text-white"
+                }`}
+                ></MdOutlineManageAccounts>
+            </p>
+          </div>
+          <div
             className={`${
-              uploadProduct &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              uploadProduct && " bg-secondary     "
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
           >
-            Service Upload
+            <p onClick={handleUploadProduct}>  Service Upload</p>
+
+            <p>
             <RiChatUploadFill
-              className={`mx-4 h-6 w-6 text-secondary ${
-                uploadProduct && "text-white"
-              }`}
-            ></RiChatUploadFill>
-          </p>
-          <p
-            onClick={handleManageProduct}
+                className={`mx-2 h-6 w-6 text-secondary ${
+                  uploadProduct && "text-white"
+                }`}
+                ></RiChatUploadFill>
+            </p>
+          </div>
+      
+          <div
             className={`${
-              manageProduct &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              manageProduct &&"bg-secondary"
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
           >
-            Manage Service
-            <FcManager className={`mx-4 h-6 w-6 text-secondary`}></FcManager>
-          </p>
+            <p onClick={handleManageProduct}> Manage Service</p>
 
-          <p
-            onClick={handleBlogPost}
+            <p>
+            <FcManager 
+                className={`mx-1 h-6 w-6 text-secondary ${
+                  manageProduct && "text-white"
+                }`}
+                ></FcManager>
+            </p>
+          </div>
+
+          <div
             className={`${
-              blogPosts &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              blogPosts &&"bg-secondary"
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
           >
-            Blog Post
+            <p onClick={handleBlogPost}>Blog Post</p>
+
+            <p>
             <BsNewspaper
-              className={`mx-4 h-6 w-6 text-secondary ${
-                blogPosts && "text-white"
-              }`}
-            ></BsNewspaper>
-          </p>
-          <p
+                className={`mx-1 h-6 w-6 text-secondary ${
+                  blogPosts && "text-white"
+                }`}
+                ></BsNewspaper>
+            </p>
+          </div>
+          {/* <p
             onClick={handleAllReviews}
             className={`${
-              reviews &&
-              "text-white flex cursor-pointer bg-secondary rounded-xl  items-center border mb-2 border-secondary p-3"
-            } text-white flex cursor-pointer rounded-xl  items-center border mb-2 border-secondary p-3`}
+              reviews && "flex  bg-secondary   items-center  "
+            } text-white text-sm flex cursor-pointer rounded-lg  items-center border mb-2 border-secondary p-2`}
           >
             Manage Reviews
             <MdOutlinePreview
@@ -188,7 +196,25 @@ const Dashboard = () => {
                 reviews && "text-white"
               }`}
             ></MdOutlinePreview>
-          </p>
+          </p> */}
+
+          <div
+            className={`${
+              reviews &&"bg-secondary"
+            } text-white flex items-center text-sm cursor-pointer rounded-md   border mb-2 border-secondary p-2`}
+          >
+            <p  onClick={handleAllReviews}>ManageReviews</p>
+
+            <p>
+            <MdOutlinePreview
+                className={`mx-2 h-6 w-6 text-secondary ${
+                  reviews &&"text-white"
+                }`}
+                ></MdOutlinePreview>
+            </p>
+          </div>
+
+
         </aside>
 
         <main className="w-full text-center">

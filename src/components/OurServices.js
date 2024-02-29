@@ -76,13 +76,14 @@ const OurServices = (data) => {
         </div>
       </section>
       <section className="lg:block flex justify-center items-center">
-        <section className="lg:grid  grid-cols-3 gap-5 font-serif ">
-          {serviceData ?.length === 0 ||
+
+      {serviceData ?.length === 0 ||
           !serviceData ?.length ? (
             <div className="flex justify-center my-20 items-center">
               <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
             </div>
-          ) : (
+          ) :     <section className="lg:grid  grid-cols-3 gap-5 font-serif ">
+          {
             serviceData ?.slice(0, 6)?.map((p) => {
               return (
              <div className="mx-auto ">
@@ -123,8 +124,53 @@ const OurServices = (data) => {
              </div>
               );
             })
-          )}
-        </section>
+          }
+        </section>}
+
+        {/* <section className="lg:grid  grid-cols-3 gap-5 font-serif ">
+          {
+            serviceData ?.slice(0, 6)?.map((p) => {
+              return (
+             <div className="mx-auto ">
+                 <div
+                  data-aos="fade-up"
+                  data-aos-duration="2000"
+                  data-aos-anchor-placement="top-bottom"
+                  className="card card-compact w-96 text-black my-10  lg:my-5 lg:my-0 bg-base-100 shadow-xl"
+                >
+                  <figure>
+                    <img
+                      className="h-[256px] w-[384px]"
+                      src={p.images}
+                      alt="Shoes"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">Shoes!</h2>
+                    <p className="text-xl">
+                      If a dog chews shoes whose shoes does he choose?
+                    </p>
+                    <div className="card-actions justify-between">
+                      <button
+                        onClick={() => handleCartPost(p.id)}
+                        className="btn btn-secondary btn-xs text-white"
+                      >
+                        Add To Cart
+                      </button>
+                      <button
+                        onClick={() => handleNavigate(p.id)}
+                        className="btn btn-secondary  btn-xs text-white"
+                      >
+                        Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+             </div>
+              );
+            })
+          }
+        </section> */}
       </section>
       <div className="flex justify-end my-4 lg:my-8 ">
         <button
