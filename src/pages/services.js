@@ -58,7 +58,7 @@ const Services = () => {
     <div className="flex flex-col md:flex-row px-10">
       {/* Sidebar - Filters */}
       <aside
-        data-aos="fade-left"
+        data-aos="fade-right"
         data-aos-duration="1000"
         data-aos-anchor-placement="top-bottom"
         className="md:w-1/4 p-4 bg-gray-200"

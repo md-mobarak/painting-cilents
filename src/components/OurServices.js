@@ -76,7 +76,7 @@ const OurServices = (data) => {
         </div>
       </section>
       <section className="lg:block flex justify-center items-center">
-        <section className="lg:grid  grid-cols-3 gap-5 font-serif">
+        <section className="lg:grid  grid-cols-3 gap-5 font-serif ">
           {serviceData ?.length === 0 ||
           !serviceData ?.length ? (
             <div className="flex justify-center my-20 items-center">
@@ -85,11 +85,12 @@ const OurServices = (data) => {
           ) : (
             serviceData ?.slice(0, 6)?.map((p) => {
               return (
-                <div
+             <div className="mx-auto ">
+                 <div
                   data-aos="fade-up"
                   data-aos-duration="2000"
                   data-aos-anchor-placement="top-bottom"
-                  className="card card-compact w-96 text-black my-5 lg:my-0 bg-base-100 shadow-xl"
+                  className="card card-compact w-96 text-black my-10  lg:my-5 lg:my-0 bg-base-100 shadow-xl"
                 >
                   <figure>
                     <img
@@ -119,6 +120,7 @@ const OurServices = (data) => {
                     </div>
                   </div>
                 </div>
+             </div>
               );
             })
           )}
