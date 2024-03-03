@@ -3,6 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-key */
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { AiFillFormatPainter } from "react-icons/ai";
 
@@ -58,36 +59,49 @@ const blogs = () => {
       <h1 className="text-center text-4xl font-bold text-secondary mt-10">
         RECENT BLOGS
       </h1>
-      <div className="lg:grid grid-cols-3 lg:my-0 my-4 p-20 gap-8">
-        {blogs?.data?.map((b) => {
-          return (
-            <div
-              data-aos="fade-up"
-              data-aos-duration="2000"
-              data-aos-anchor-placement="top-bottom"
-              className="max-w-md mx-auto bg-white p-4 rounded-lg shadow-md"
-            >
-              <img
+      {!blogs?.data?.length ? (
+        <div className="flex justify-center my-20 items-center">
+          <span className="loading loading-infinity w-16   text-secondary loading-xl"></span>
+        </div>
+      ) : (
+        <div className="lg:grid grid-cols-3 lg:my-0 my-4 p-20 gap-8">
+          {blogs?.data?.map((b) => {
+            return (
+              <div
+                data-aos="fade-up"
+                data-aos-duration="2000"
+                data-aos-anchor-placement="top-bottom"
+                className="max-w-md mx-auto bg-white p-4 rounded-lg shadow-md"
+              >
+                <Image
+                  src={b.img_url} // Use imageUrl if dynamic, otherwise use static import
+                  alt="My image alt text" // Provide a descriptive alt text
+                  width={500} // Optional: Set image width
+                  height={300} // Optional: Set image height
+                  className="w-full h-40 object-cover object-center mb-4 rounded-md" // Add your desired class
+                />
+                {/* <img
                 className="w-full h-40 object-cover object-center mb-4 rounded-md"
                 src={b.img_url}
                 alt="Card Image"
-              />
-              <h2 className="text-xl font-bold text-gray-800 mb-2">
-                {b.title}
-              </h2>
-              <p className="text-gray-600 mb-2">
-                {b?.description?.slice(0, 100)}
-              </p>
-              <p className="text-gray-400 text-sm mb-2">
-                Date: November 20, 2023
-              </p>
-              <button className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
-                Details
-              </button>
-            </div>
-          );
-        })}
-      </div>
+              /> */}
+                <h2 className="text-xl font-bold text-gray-800 mb-2">
+                  {b.title}
+                </h2>
+                <p className="text-gray-600 mb-2">
+                  {b?.description?.slice(0, 100)}
+                </p>
+                <p className="text-gray-400 text-sm mb-2">
+                  Date: November 20, 2023
+                </p>
+                <button className="bg-secondary text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-indigo-700">
+                  Details
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
